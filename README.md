@@ -1,2 +1,0 @@
-# osugiw.github.io
-Portfolio
