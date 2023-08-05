@@ -1454,3 +1454,36 @@ body.offcanvas {
 
 .js .animate-box {
   opacity: 0; }
+
+.img-md-responsive {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5em;
+  max-width: 40%;
+  height: auto;
+}
+
+.img-side-img {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  max-width: 100%;
+  height: auto;
+}
+
+.img-wrap-txt-left {
+  float: left;
+  margin-right: 1.5em;
+  margin-bottom: 1.5em;
+  max-width: 40%;
+  height: auto;
+}
+
+.img-wrap-txt-right {
+  float: right;
+  margin-left: 1.5em;
+  margin-bottom: 1.5em;
+  max-width: 40%;
+  height: auto;
+}
