@@ -1487,3 +1487,7 @@ body.offcanvas {
   max-width: 60%;
   height: auto;
 }
+
+.project-title-preview{
+  color: white;
+}
