@@ -1426,7 +1426,7 @@ body.offcanvas {
   float: left;
   margin-right: 1.5em;
   margin-bottom: 1.5em;
-  max-width: 60%;
+  max-width: 30%;
   height: auto;
 }
 
@@ -1434,6 +1434,23 @@ body.offcanvas {
   float: right;
   margin-left: 1.5em;
   margin-bottom: 1.5em;
-  max-width: 60%;
+  max-width: 30%;
   height: auto;
+}
+
+/* Custom class for project descriptions and abstracts */
+.project-text {
+    font-size: 18px;
+    line-height: 1.8;      /* Increased slightly for better readability at 18px */
+    color: #3b3b3b;       /* A professional off-black/dark grey */
+    text-align: justify;  /* Optional: gives it a clean, paper-like look */
+    margin-bottom: 20px;
+}
+
+/* Optional: Slightly smaller text for mobile screens so it doesn't look cramped */
+@media screen and (max-width: 768px) {
+    .project-text {
+        font-size: 16px;
+        line-height: 1.6;
+    }
 }
