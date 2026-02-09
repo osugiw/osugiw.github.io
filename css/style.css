@@ -1406,12 +1406,22 @@ body.offcanvas {
   opacity: 0; }
 
 .img-md-responsive {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 1.5em;
-  max-width: 40%;
-  height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.5em;
+    /* This ensures it's never too big on desktop but fills space on mobile */
+    max-width: 500px; 
+    width: 100%;
+    height: auto;
+    border-radius: 8px; /* Optional: adds a professional rounded look */
+}
+
+/* On small phones, make it slightly smaller than full width */
+@media screen and (max-width: 480px) {
+    .img-md-responsive {
+        max-width: 90%;
+    }
 }
 
 .img-side-img {

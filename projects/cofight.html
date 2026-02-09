@@ -104,16 +104,29 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					</div>
 
 					<!-- Overview  -->
-					<div class="row animate-box" style="margin-bottom: 2.5em;" data-animate-effect="fadeInRight">
+					<div class="row" style="margin-bottom: 2.5em;">
 						<div class="col-md-12" >
-							<img class="img-md-responsive" alt="Cofight Highlight" src="cofight/Cofight.png">
-							<b>This project was part of the
-                                <a href="https://faith.petra.ac.id/2022/new.php"> Faith International Competition by the Faculty of Industrial Technology Petra Christian University</a>
-                                in 2021 where my team won 2nd place in the electrical engineering category.
-                            </b>
+							<div class="row" style="margin-bottom: 3em;">
+								<div class="col-md-12 text-center">
+									<img class="img-md-responsive" alt="Cofight Highlight" src="cofight/Cofight.png">
+									
+									<div style="max-width: 800px; margin: 0 auto;">
+										<p class="project-text">
+											<span style="color: #2c98f0; font-weight: bold; font-size: 1.2em;">🏆 Award Winner</span><br>
+											<b>This project was part of the 
+												<a href="https://faith.petra.ac.id/2022/new.php" target="_blank" class="paper-link">
+													Faith International Competition
+												</a> 
+												by the Faculty of Industrial Technology, Petra Christian University in 2021, 
+												where my team won 2nd place in the Electrical Engineering category.
+											</b>
+										</p>
+									</div>
+								</div>
+							</div>
 							<br><br>
 							<h3>Overview</h3>
-							<p>The competition’s challenge is to design a product based on the Internet of Things (IoT), which could optimize the implementation of the COVID-19 health protocol.
+							<p class="project-text">The competition’s challenge is to design a product based on the Internet of Things (IoT), which could optimize the implementation of the COVID-19 health protocol.
 								As the number of COVID-19 patients increased day by day, the hospital facilities were overloaded and couldn't accommodate all of the patients.
 								Hence, the hospital prioritized the patients with the most urgency, and the rest had did self-isolation.
 								However, the patients who do self-isolation must also be monitored daily by health workers.
@@ -132,7 +145,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 							<h3>System Architecture</h3>
 							<div class="row">
 								<div class="col-md-12">
-                                    <p>
+                                    <p class="project-text">
                                         Our system architecture consisted of three main parts, including the wristband, the server, and the web user interface application.
 										The wristband will be connected to the internet and periodically send the patient's oxygen and heartbeat through the MQTT (Message Queuing Telemetry Transport Technical Committee) to the server. 
 										The hospital or health worker, as well as the family, can monitor the patients through the browser on their mobile phone or desktop.
@@ -143,13 +156,13 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 							</div>
 							<div class="row">
 								<div class="col-md-12">
-									<p>
+									<p class="project-text">
 										Inside, the wristband device consisted of a main board and a charging board. The main board included the microcontroller (ESP8266), 
 										the oxygen and heartbeat sensor (MAX30102), the OLED display, and two buttons, one for the emergency button and the other for turning on the device. The ESP8266 also has a Wi-Fi communication feature, which connects to the nearby Wi-Fi and sends data to the server.
 									</p>
 									<div class="row" style="margin-top: 2.5em;">
-										<div class="col-md-8"><img class="img-side-img" alt="charging board" src="cofight/Schematic Wemos.png"></div>
-										<div class="col-md-8"><img class="img-side-img" alt="main board" src="cofight/Schematic Charging.png"></div>
+										<div class="col-md-6"><img class="img-side-img" alt="charging board" src="cofight/Schematic Wemos.png"></div>
+										<div class="col-md-6"><img class="img-side-img" alt="main board" src="cofight/Schematic Charging.png"></div>
 									</div>
 								</div>
 							</div>
@@ -162,10 +175,10 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 							<h3>Demo</h3>
 							<div class="row">
 								<div class="col-md-12">
-									<p>The demo shows the wristband device's operation for sensing the patient's oxygen rate and heartbeat and the website interface for monitoring the patient's data. Please watch the videos below for the system demo:</p>
+									<p class="project-text">The demo shows the wristband device's operation for sensing the patient's oxygen rate and heartbeat and the website interface for monitoring the patient's data. Please watch the videos below for the system demo:</p>
 								</div>
-								<div class="col-md-10"><video class="img-side-img" controls><source src="cofight/Prototype.mp4" type="video/mp4"></video></div>
-								<div class="col-md-10"><video class="img-side-img" controls><source src="cofight/DashBoard.mp4" type="video/mp4"></video></div>
+								<div class="col-md-6"><video class="img-side-img" controls><source src="cofight/Prototype.mp4" type="video/mp4"></video></div>
+								<div class="col-md-6"><video class="img-side-img" controls><source src="cofight/DashBoard.mp4" type="video/mp4"></video></div>
 							</div>
 						</div>
 					</div>
@@ -174,7 +187,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 						<div class="col-md-12">
 							<h3>Contributing Organizations & People</h3>
 							<div class="row">
-								<div class="col-md-12">
+								<div class="col-md-12 project-text">
 									<p>
 										I would like to give big appreciation to my team <a href="https://id.linkedin.com/in/feliciadarmanto">Felicia Darmanto</a> and <a href="https://id.linkedin.com/in/danny-purnama">Danny Purnama</a> for giving their best work during their tight schedules.
 										Our hard work work paid off by winning second place in the Electrical Engineering Competition.
