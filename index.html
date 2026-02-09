@@ -46,10 +46,6 @@
 
 	<!-- Modernizr JS -->
 	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 
 	</head>
 	<body>
@@ -58,18 +54,17 @@
 		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 			<div class="text-center">
-				<div class="author-img" style="background-image: url(images/profile_picture.jpg);"></div>
+				<div class="author-img" style="background-image: url('https://media.licdn.com/dms/image/v2/D5603AQE_PoxdPqhXRw/profile-displayphoto-scale_400_400/B56ZkGf6deHcAo-/0/1756750670009?e=1772064000&v=beta&t=y12NcD47DUDci3Nd9aKXpck3Onu3fZc0_OhjBK9bUWY');"></div>
 				<h1 id="colorlib-logo"><a href="index.html">Sugiarto Wibowo</a></h1>
 				<span class="position">
-					<a href="#">Embedded Software Engineer</a>
-					<p>in Indonesia</p>
+					<a href="#">ECE Graduate Student</a>
+					<p>Rice University, Houston, TX</p>
 				</span>
 			</div>
 			<nav id="colorlib-main-menu" role="navigation" class="navbar">
 				<div id="navbar" class="collapse">
 					<ul>
-						<li class="active"><a href="#" data-nav-section="home">Home</a></li>
-						<li><a href="#" data-nav-section="about">About</a></li>
+						<li class="active"><a href="#" data-nav-section="about">About</a></li>
 						<li><a href="#" data-nav-section="education">Education</a></li>
 						<li><a href="#" data-nav-section="experience">Experience</a></li>
 						<li><a href="#" data-nav-section="work">Work</a></li>
@@ -97,46 +92,50 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 		</aside>
 
 		<div id="colorlib-main">
-			<section id="colorlib-hero" class="js-fullheight" data-section="home">
-				<div class="flexslider js-fullheight">
-					<ul class="slides">
-				   	<li style="background-image: url(images/bg_coffee.jpg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-6 col-md-offset-3 col-md-pull-3 col-sm-12 col-xs-12 js-fullheight slider-text">
-					   				<div class="slider-text-inner js-fullheight">
-					   					<div class="desc">
-						   					<h1 style="color: aliceblue;">Hi! <br>I'm Sugiarto</h1>
-						   					<h2 style="color: aliceblue;">Scroll down to know more about me!</h2>
-											<!-- <p><a class="btn btn-primary btn-learn">Download CV <i class="icon-download4"></i></a></p> -->
-										</div>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li>
-				  	</ul>
-			  	</div>
-			</section>
-
 			<section class="colorlib-about" data-section="about">
 				<div class="colorlib-narrow-content">
 					<div class="row">
 						<div class="col-md-12">
-							<div class="row row-bottom-padded-sm animate-box" data-animate-effect="fadeInLeft">
+							<div class="row row-bottom-padded-sm">
 								<div class="col-md-12">
 									<div class="about-desc">
+										<span class="heading-meta">Introduction</span>
 										<h2 class="colorlib-heading">About Me</h2>
-										<p>
-											Sugiarto graduated with a bachelor's degree in electrical engineering from Petra Christian University, Indonesia. Upon finishing his bachelor's degree, he worked as an embedded engineer at the biggest electronics manufacturer in Indonesia, namely Polytron Indonesia. After working for several years, he decided to pursue a master's in electrical & computer engineering at Rice University, United States, to deepen his skills and knowledge in the area of wearable technologies. In the future, he aspires to innovate technologies to support the elderly's daily lives.
-										</p>
-										<p>
-											His expertise includes embedded software programming, Internet of Things, and system integration that covers areas of home appliances and wearable technology applications. To deepen his skills, he continuously learn and experiments with the state-of-the-art technology. He also often works with his friends on some small-scale projects for clients from across countries.
-										</p>
-										<p>
-											His hobbies are brewing coffee, watching movies, cooking, culinary, exploring new places, and strolling around.
-										</p>
+										
+										<p><strong>Sugiarto</strong> is a Graduate Student at <strong>Rice University</strong>, pursuing a Master’s in Electrical and Computer Engineering. His expertise sits at the intersection of Computer Architecture and Wearable Technology, with a deep technical focus on FPGA prototyping, RISC-V systems, and high-performance embedded design.</p>
+										
+										<p>Currently, he is spearheading a Capstone project: a <strong>Wearable AI Assistant</strong> designed to quantify human productivity and fatigue through multi-modal sensor fusion and conversational analysis.</p>
+										
+										<p>Before Rice, Sugiarto spent several years as an Embedded Software Engineer at <strong>Polytron Indonesia</strong>, the nation's largest electronics manufacturer. This industry background taught him how to scale IoT solutions from prototypes to mass production. Today, he is dedicated to leveraging that experience to build the next generation of assistive wearables.</p>
+
+										<p>When he isn't optimizing firmware, you’ll likely find him exploring new cities or perfecting his craft as a home barista—whether it’s a precise V60 pour-over, Mokapot, AeroPress, or a dialed-in espresso.</p>
+									</div>
+								</div>
+							</div>
+
+							<div class="row">
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
+									<div class="services color-1">
+										<span class="icon2"><i class="icon-params"></i></span>
+										<h3>FPGA & RISC-V</h3>
+									</div>
+								</div>
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
+									<div class="services color-2">
+										<span class="icon2"><i class="icon-device-laptop"></i></span>
+										<h3>Embedded C/C++</h3>
+									</div>
+								</div>
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInTop">
+									<div class="services color-3">
+										<span class="icon2"><i class="icon-data"></i></span>
+										<h3>IoT Systems</h3>
+									</div>
+								</div>
+								<div class="col-md-3 animate-box" data-animate-effect="fadeInBottom">
+									<div class="services color-4">
+										<span class="icon2"><i class="icon-coffee"></i></span>
+										<h3>Coffee Brewing</h3>
 									</div>
 								</div>
 							</div>
@@ -148,13 +147,13 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 			<section class="colorlib-education" data-section="education">
 				<div class="colorlib-narrow-content">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3 ">
 							<span class="heading-meta">Education</span>
-							<h2 class="colorlib-heading animate-box">Education</h2>
+							<h2 class="colorlib-heading ">Education</h2>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+						<div class="col-md-12">
 							<div class="fancy-collapse-panel">
 								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 									<div class="panel panel-default">
@@ -167,18 +166,25 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 									    </div>
 									    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="edu_one">
 									        <div class="panel-body">
-									            <p>
-													With the <a href= "https://www.fulbrightprogram.org/">Fulbright Scholarship</a>, I am pursuing my master's study at <a href="https://eceweb.rice.edu/academics/graduate-programs/mece-program">Rice University</a>, Houston, Texas, United States, starting August 2025.
-													My major is Electrical and Computer Engineering with specialization in computer engineering that focuses on wearable devices and embedded systems.
-												</p>
-												<div>
-													<li>
-														<a href="https://www.aminef.or.id/sugiarto-wibowo/">My profile at Fulbright Indonesia</a>
-													</li>
-													<li>
-														<a href="https://fulbright.rice.edu/people/sugiarto-wibowo">My profile at Fulbright@Rice</a>
-													</li>
-												</div>
+									        	<div class="row">
+										      		<div class="col-md-6">
+										      			<p>
+															With the <a href= "https://www.fulbrightprogram.org/">Fulbright Scholarship</a>, I am pursuing my master's study at <a href="https://eceweb.rice.edu/academics/graduate-programs/mece-program">Rice University</a>, Houston, Texas, United States, since August 2025.
+															My major is Electrical and Computer Engineering with specialization in computer engineering that focuses on wearable devices and embedded systems.
+															<br> Starting Spring 2026, I am working towards my capstone project about wearable AI device that capable for analyzing human's productivity and fatigue based on the daily conversation and health monitoring.
+														</p>
+										      		</div>
+										      		<div class="col-md-6">
+										      			<p>Notable Activities:</p>
+														<ul>
+															<li>Current GPA: 3.89/4.0</li>
+															<li>Part of Phi Lab at Rice University led by <a href="https://nakulg.com/">Prof. Nakul Garg</a></li>
+															<li>Volunteered in GREAT Project in 2025, a cultural event introducing Mexico's culture, by assisting special needs audiences.</li>
+															<li><a href="https://www.aminef.or.id/sugiarto-wibowo/">My profile at Fulbright Indonesia</a></li>
+															<li><a href="https://fulbright.rice.edu/people/sugiarto-wibowo">My profile at Fulbright@Rice</a></li>
+														</ul>
+										      		</div>
+									         </div>
 									        </div>
 									    </div>
 									</div>
@@ -222,11 +228,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 									    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu_three">
 									        <div class="panel-body">
 									            <p>Graduated in 2018 from <strong>Karangturi National High School</strong>, Semarang, Central Java, Indonesia</p>
-													<!-- <ul>
-														<li>Separated they live in Bookmarksgrove right</li>
-														<li>Separated they live in Bookmarksgrove right</li>
-													</ul> -->
-									        </div>
+											</div>
 									    </div>
 									</div>
 									<div class="panel panel-default">
@@ -266,15 +268,15 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 			<section class="colorlib-experience" data-section="experience">
 				<div class="colorlib-narrow-content">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
 							<span class="heading-meta">Experience</span>
-							<h2 class="colorlib-heading animate-box">Work Experience</h2>
+							<h2 class="colorlib-heading">Work Experience</h2>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
 				         <div class="timeline-centered">
-					         <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
+					         <article class="timeline-entry">
 					            <div class="timeline-entry-inner">
 
 					               <div class="timeline-icon color-1">
@@ -297,7 +299,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					         </article>
 
 
-					         <article class="timeline-entry animate-box" data-animate-effect="fadeInRight">
+					         <article class="timeline-entry">
 					            <div class="timeline-entry-inner">
 					               <div class="timeline-icon color-2">
 					                  <i class="icon-pen2"></i>
@@ -313,7 +315,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					            </div>
 					         </article>
 
-					         <article class="timeline-entry animate-box" data-animate-effect="fadeInLeft">
+					         <article class="timeline-entry">
 					            <div class="timeline-entry-inner">
 					               <div class="timeline-icon color-3">
 					                  <i class="icon-pen2"></i>
@@ -328,7 +330,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 					               </div>
 					            </div>
 					         </article>
-					         <article class="timeline-entry begin animate-box" data-animate-effect="fadeInBottom">
+					         <article class="timeline-entry begin">
 					            <div class="timeline-entry-inner">
 					               <div class="timeline-icon color-none">
 					               </div>
@@ -343,148 +345,95 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 			<section class="colorlib-work" data-section="work">
 				<div class="colorlib-narrow-content">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<h2 class="colorlib-heading animate-box">Recent Work</h2>
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
+							<h2 class="colorlib-heading">Recent Work</h2>
 						</div>
 					</div>
+
 					<div class="row">
-						<div class="col-md-6 animate-box">
+						<div class="col-md-4">
+							<a href="https://github.com/osugiw/elec537_robotcar">
+								<div class="project" style="background-image: url(projects/assistive-robot-in-low-visibility-env.png);">
+									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
+								</div>
+							</a>
+							<h4>Assistive Robot in Low-Visibility Conditions</h4>
+						</div>
+						<div class="col-md-4">
 							<a href="https://github.com/osugiw/customized_micropython">
 								<div class="project" style="background-image: url(projects/micropython/Micropython.png);">
-									<div class="desc">
-										<div class="con">
-											<h3 class="project-title-preview">Customizing Internal of Micropython Firmware for ESP32</h3>
-											<span>Embedded Programming | Internet of Things</span>
-										</div>
-									</div>
+									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
 								</div>
 							</a>
-							<h4>Customizing Internal of Micropython Firmware for ESP32<br><br></h4>
+							<h4>Customizing Internal of Micropython Firmware</h4>
 						</div>
-						<div class="col-md-6 animate-box">
+						<div class="col-md-4">
 							<a href="projects/alzo.html">
 								<div class="project" style="background-image: url(projects/alzo/Web_Project_BG_Alzo.jpg);">
-									<div class="desc">
-										<div class="con">
-											<h3 class="project-title-preview">Outdoor Alzheimer's Patient Tracking System Based on Internet of Things</h3>
-											<span>Embedded Programming | Internet of Things</span>
-										</div>
-									</div>
+									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
 								</div>
-								<h4 style="align-items: center;">Outdoor Alzheimer's Patient Tracking System Based on Internet of Things</h4>
 							</a>
+							<h4>Outdoor Alzheimer's Patient Tracking System</h4>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-6 animate-box">
+
+					<div class="row" style="margin-top: 30px;">
+						<div class="col-md-4">
 							<a href="projects/motorcycle_tracking.html">
 								<div class="project" style="background-image: url(projects/motorcycle_tracking/Hardware_Top.jpg);">
-									<div class="desc">
-										<div class="con">
-											<h3 class="project-title-preview">IoT GPS Tracking System for Motorcycle</h3>
-											<span>Embedded Programming | Internet of Things</span>
-										</div>
-									</div>
+									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
 								</div>
 							</a>
-							<h4>IoT GPS Tracking System for Motorcycle<br><br></h4>
+							<h4>IoT GPS Tracking System for Motorcycle</h4>
 						</div>
-						<div class="col-md-6 animate-box">
+						<div class="col-md-4">
 							<a href="projects/sign_language.html">
 								<div class="project" style="background-image: url(projects/sign_language/Highlight.jpg);">
-									<div class="desc">
-										<div class="con">
-											<h3 class="project-title-preview">Sign Language Detection using YOLOv5</h3>
-											<span>Artificial Intelligence | Embedded Programming</span>
-										</div>
-									</div>
+									<div class="desc"><div class="con"><span>AI | Embedded Programming</span></div></div>
 								</div>
 							</a>
 							<h4>Sign Language Detection using YOLOv5</h4>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 animate-box">
+						<div class="col-md-4">
 							<a href="projects/wireless_attendance.html">
 								<div class="project" style="background-image: url(projects/wireless_attendance/Overview.png);">
-									<div class="desc">
-										<div class="con">
-											<h3 class="project-title-preview">Wireless Employee Attendance</h3>
-											<span>Embedded Programming | Internet of Things</span>
-										</div>
-									</div>
+									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
 								</div>
 							</a>
 							<h4>Wireless Employee Attendance</h4>
 						</div>
-						<div class="col-md-6 animate-box">
+					</div>
+
+					<div class="row" style="margin-top: 30px;">
+						<div class="col-md-4">
 							<a href="projects/cofight.html">
 								<div class="project" style="background-image: url(projects/cofight/Cofight.png);">
-									<div class="desc">
-										<div class="con">
-											<h3 class="project-title-preview">CoFight - an COVID-19 Wristband IoT Device</h3>
-											<span>Embedded Programming | Internet of Things</span>
-										</div>
-									</div>
+									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
 								</div>
 							</a>
-							<h4>CoFight - an COVID-19 Wristband IoT Device</h4>
+							<h4>CoFight - COVID-19 Wristband IoT Device</h4>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-6 animate-box">
+						<div class="col-md-4">
 							<a href="https://github.com/elektronikapetra/praktikum-emsys">
 								<div class="project" style="background-image: url(projects/fpga_pynqz2/Overview.jpg);">
-									<div class="desc">
-										<div class="con">
-											<h3 class="project-title-preview">FPGA with Pynq-Z2</h3>
-											<span>Embedded Programming</span>
-										</div>
-									</div>
+									<div class="desc"><div class="con"><span>Embedded Programming</span></div></div>
 								</div>
 							</a>
 							<h4>FPGA with Pynq-Z2</h4>
 						</div>
-						<div class="col-md-6 animate-box">
+						<div class="col-md-4">
 							<div class="project" style="background-image: url(projects/ur_camera/Overview.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3 class="project-title-preview">Collaborative Robot for Items Sorting using Camera</h3>
-										<span>Robotics | Computer Vision</span>
-									</div>
-								</div>
+								<div class="desc"><div class="con"><span>Robotics | Computer Vision</span></div></div>
 							</div>
-							<h4>Collaborative Robot for Items Sorting using Camera</h4>
+							<h4>Collaborative Robot for Items Sorting</h4>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-6 animate-box">
-							<div class="project" style="background-image: url(projects/ecys/Overview.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3 class="project-title-preview">Earthquake Evacuation System for Multi-Storey Building</h3>
-										<span>Programmable Logic Controller</span>
-									</div>
-								</div>
-							</div>
-							<h4>Earthquake Evacuation System for Multi-Storey Building</h4>
-						</div>
-						<div class="col-md-6 animate-box">
-							<div class="project" style="background-image: url(projects/ldr_robot/Overview.jpg);">
-								<div class="desc">
-									<div class="con">
-										<h3 class="project-title-preview">Light Dependent Robot</h3>
-										<span>Electronics</span>
-									</div>
-								</div>
-							</div>
-							<h4>Light Dependent Robot</h4>
-						</div>
-					</div>
-					<div class="row" style="margin-top: 50px;">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInUp">
+
+					<div class="row" style="margin-top: 70px; margin-bottom: 50px;">
+						<div class="col-md-12" data-animate-effect="fadeInUp">
 							<p style="text-align: center;">
-								<a class="btn btn-primary btn-lg" href="https://trailblazing-tech.github.io/" style="padding: 15px 30px; border-radius: 10px; display: inline-block;">
+								<a class="btn btn-primary btn-lg" href="https://trailblazing-tech.github.io/" 
+								style="padding: 20px 45px; font-size: 22px; font-weight: 700; border-radius: 12px; display: inline-block; text-decoration: none; letter-spacing: 1px;">
 									More Work can be found here
 								</a>
 							</p>
@@ -496,12 +445,12 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 			<section class="colorlib-work" data-section="certification">
 				<div class="colorlib-narrow-content">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<h2 class="colorlib-heading animate-box">Professional Certification</h2>
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3  "   >
+							<h2 class="colorlib-heading  ">Professional Certification</h2>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+						<div class="col-md-12  "   >
 							<div class="fancy-collapse-panel">
 								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 									<div class="panel panel-default">
@@ -538,12 +487,12 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 			<section class="colorlib-education" data-section="publication_patent">
 				<div class="colorlib-narrow-content">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 animate-box" data-animate-effect="fadeInLeft">
-							<h2 class="colorlib-heading animate-box">Publication & Patent</h2>
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3  "   >
+							<h2 class="colorlib-heading  ">Publication & Patent</h2>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+						<div class="col-md-12  "   >
 							<div class="fancy-collapse-panel">
 								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 									<div class="panel panel-default">
@@ -571,10 +520,7 @@ Copyright <script>document.write(new Date().getFullYear());</script> All rights 
 									</div>
 									<div class="panel panel-default">
 									    <div class="panel-heading" role="tab" id="edu_three">
-									        <h4 class="panel-title">
-									            <a data-toggle="collapse" data-parent="#publication" href="#collapsePatent" aria-expanded="false" aria-controls="collapsePatent">Patent
-									            </a>
-									        </h4>
+									        <a data-toggle="collapse" data-parent="#publication" href="#collapsePatent" aria-expanded="false" aria-controls="collapsePatent">Patent</a>
 									    </div>
 									    <div id="collapsePatent" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="edu_three">
 									        <div class="panel-body">
