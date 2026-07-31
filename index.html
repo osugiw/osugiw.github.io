@@ -1,650 +1,449 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Sugiarto Wibowo</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="" />
-	<meta name="keywords" content="" />
-	<meta name="author" content="" />
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sugiarto Wibowo — RF & Embedded Systems Engineer</title>
+<meta name="description" content="Sugiarto Wibowo — RF/Hardware engineer and Fulbright Scholar at Rice University. Software-defined radio, embedded Linux, FPGA, and PCB design.">
+<link rel="shortcut icon" href="images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/site.css">
+</head>
+<body class="bg-ink">
 
-  <!-- Facebook and Twitter integration -->
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+<!-- ===== Trace rail (desktop only) ===== -->
+<div class="hidden lg:flex fixed left-8 top-0 h-full w-px z-10 flex-col items-center">
+  <div class="w-px h-full bg-ink-line relative">
+    <div id="trace-progress" class="w-px bg-copper absolute top-0 left-0" style="height:0%;"></div>
+  </div>
+</div>
+<!-- ===== Nav ===== -->
+<header class="fixed top-0 inset-x-0 z-30 backdrop-blur bg-ink/80 border-b border-ink-line">
+  <div class="max-w-6xl mx-auto px-6 lg:pl-24 lg:pr-10 h-16 flex items-center justify-between">
+    <a href="#top" class="font-mono text-sm tracking-widest text-paper">Sugiarto Wibowo</a>
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#about" class="nav-link relative font-mono text-xs uppercase tracking-wider text-paper-muted hover:text-paper transition-colors" data-section="about">About</a>
+      <a href="#experience" class="nav-link relative font-mono text-xs uppercase tracking-wider text-paper-muted hover:text-paper transition-colors" data-section="experience">Experience</a>
+      <a href="#work" class="nav-link relative font-mono text-xs uppercase tracking-wider text-paper-muted hover:text-paper transition-colors" data-section="work">Work</a>
+      <a href="#education" class="nav-link relative font-mono text-xs uppercase tracking-wider text-paper-muted hover:text-paper transition-colors" data-section="education">Education</a>
+      <a href="#writing" class="nav-link relative font-mono text-xs uppercase tracking-wider text-paper-muted hover:text-paper transition-colors" data-section="writing">Publications</a>
+    </nav>
+    <button id="nav-toggle" class="md:hidden text-paper" aria-label="Toggle menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden border-t border-ink-line bg-ink px-6 py-4 flex flex-col gap-4">
+    <a href="#about" class="font-mono text-xs uppercase tracking-wider text-paper-muted">About</a>
+    <a href="#experience" class="font-mono text-xs uppercase tracking-wider text-paper-muted">Experience</a>
+    <a href="#work" class="font-mono text-xs uppercase tracking-wider text-paper-muted">Work</a>
+    <a href="#education" class="font-mono text-xs uppercase tracking-wider text-paper-muted">Education</a>
+    <a href="#writing" class="font-mono text-xs uppercase tracking-wider text-paper-muted">Publications</a>
+  </div>
+</header>
 
-	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-	<link rel="shortcut icon" href="images/favicon.ico">
+<main id="top">
 
-	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
-	<link rel="stylesheet" href="https://i.icomoon.io/public/temp/fc80d0e0c9/UntitledProject/style-svg.css">
-	<script defer src="https://i.icomoon.io/public/temp/fc80d0e0c9/UntitledProject/svgxuse.js"></script>
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-	<!-- Flexslider  -->
-	<link rel="stylesheet" href="css/flexslider.css">
-	<!-- Flaticons  -->
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-	<!-- Owl Carousel -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+<!-- ===== Hero ===== -->
+<section class="relative pt-32 pb-24 lg:pl-24 px-6 max-w-6xl mx-auto overflow-hidden">
+  <div class="absolute inset-0 bg-grid bg-grid opacity-40 pointer-events-none" style="mask-image: linear-gradient(to bottom, black, transparent);"></div>
+  <div class="relative grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
+    <div>
+      <p class="eyebrow mb-5">Fulbright Scholar · Rice University · Houston, TX</p>
+      <h1 class="font-display text-5xl md:text-6xl leading-[1.05] text-paper mb-6">
+        Building embedded systems<br> from prototype <span class="text-copper italic">to</span> production.
+      </h1>
+      <p class="text-paper-muted text-lg leading-relaxed max-w-lg mb-8">
+        Embedded systems engineer with experience across consumer electronics, wearables, and RF
+        hardware — from shipping production firmware for a digital rice cooker at Polytron, to
+        building Sally, a wearable AI assistant for Alzheimer's care, to developing a
+        software-defined radio platform at Rice University's Wireless Lab. Away from the bench,
+        I'm usually on a trail, camera in hand, or dialing in a pour-over.
+      </p>
+      <div class="flex flex-wrap gap-3 mb-10">
+        <span class="pill">MECE — Rice University</span>
+        <span class="pill">Embedded Linux</span>
+        <span class="pill">Wearable Devices</span>
+        <span class="pill">Production Firmware</span>
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="#experience" class="inline-flex items-center gap-2 bg-copper text-ink font-mono text-xs uppercase tracking-wider px-5 py-3 rounded-sm hover:bg-copper-bright transition-colors">
+          View Experience
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="https://github.com/osugiw" target="_blank" class="font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">GitHub ↗</a>
+      </div>
+    </div>
 
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+    <!-- Portrait panel: signature element -->
+    <div class="relative mx-auto lg:mx-0 max-w-xs w-full">
+      <div class="absolute -top-3 -left-3 w-8 h-8 border-t-2 border-l-2 border-copper"></div>
+      <div class="absolute -bottom-3 -right-3 w-8 h-8 border-b-2 border-r-2 border-copper"></div>
+      <div class="relative aspect-[4/5] bg-ink-surface border border-ink-line rounded-sm overflow-hidden">
+        <img
+          src="images/profile.jpeg"
+          alt="Sugiarto Wibowo"
+          class="w-full h-full object-cover"
+          onerror="this.style.display='none'; document.getElementById('photo-placeholder').style.display='flex';"
+        >
+        <div id="photo-placeholder" class="absolute inset-0 hidden flex-col items-center justify-center gap-3 bg-grid bg-grid text-center p-6">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" class="text-paper-faint"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"/></svg>
+          <p class="font-mono text-[11px] text-paper-faint leading-relaxed">Add photo at<br><span class="text-signal">images/profile.jpeg</span></p>
+        </div>
+      </div>
+      <div class="flex items-center justify-between mt-3 font-mono text-[11px] text-paper-faint">
+        <span>Zion National Park</span>
+        <span>Based in Houston, TX</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-	</head>
-	<body>
-	<div id="colorlib-page">
-		<div class="container-wrap">
-		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
-		<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
-			<div class="text-center">
-				<div class="author-img" style="background-image: url('https://media.licdn.com/dms/image/v2/D5603AQE_PoxdPqhXRw/profile-displayphoto-scale_400_400/B56ZkGf6deHcAo-/0/1756750670009?e=1772064000&v=beta&t=y12NcD47DUDci3Nd9aKXpck3Onu3fZc0_OhjBK9bUWY');"></div>
-				<h1 id="colorlib-logo"><a href="index.html">Sugiarto Wibowo</a></h1>
-				<span class="position">
-					<a href="#">ECE Graduate Student</a>
-					<p>Rice University, Houston, TX</p>
-				</span>
-			</div>
-			<nav id="colorlib-main-menu" role="navigation" class="navbar">
-				<div id="navbar" class="collapse">
-					<ul>
-						<li class="active"><a href="#" data-nav-section="about">About</a></li>
-						<li><a href="#" data-nav-section="education">Education</a></li>
-						<li><a href="#" data-nav-section="experience">Experience</a></li>
-						<li><a href="#" data-nav-section="work">Work</a></li>
-						<li><a href="#" data-nav-section="certification">Professional Certification</a></li>
-						<li><a href="#" data-nav-section="publication_patent">Publication & Patent</a></li>
-					</ul>
-				</div>
-			</nav>
-			<div class="colorlib-footer">
-				<p><small>&copy; <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright <script>document.write(new Date().getFullYear());</script> All rights reserved. Made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --> </span><span>Background Images: <a href="https://unsplash.com/" target="_blank">Unsplash.com</a></span></small></p>
-				<ul>
-					<li><a href="https://github.com/osugiw" target="_blank"><i class="icon-social-github"></i></a></li>
-					<li><a href="https://www.instagram.com/osugi_w/" target="_blank"><i class="icon-instagram"></i></a></li>
-					<li><a href="https://www.linkedin.com/in/sugiarto-wibowo-osw/" target="_blank"><i class="icon-linkedin2"></i></a></li>
-					
-					<li>
-						<a href="https://scholar.google.com/citations?user=nWA4pUsAAAAJ&hl=en" target="_blank">
-							<svg viewBox="0 0 24 24" style="width: 18px; fill: currentColor; margin-bottom: -2px;">
-								<path d="M12 24a7 7 0 0 1-7-7c0-2.58 2.13-4.7 4.71-4.7h.29v-2.31L3.33 6.67 12 0l8.67 6.67L15 10v6c0 4.42-3.58 8-8 8zm0-13.33V10l3.33-2.5L12 5.17l-3.33 2.33 3.33 2.5v.67c-1.47 0-2.67 1.2-2.67 2.66s1.2 2.67 2.67 2.67 2.67-1.2 2.67-2.67c0-1.07-.6-1.93-1.47-2.33z"/>
-							</svg>
-						</a>
-					</li>
-					
-					<li><a href="https://youtube.com/@osugi_w?si=elQx8lnaTgSk8Hkh" target="_blank"><i class="icon-youtube"></i></a></li>
-				</ul>
-			</div>
-			<div class="colorlib-footer">
-				<script src="https://static.elfsight.com/platform/platform.js" data-use-service-core defer></script>
-				<div class="elfsight-app-7a2c62c7-7263-4410-8572-35487f42acfe" data-elfsight-app-lazy></div>
-			</div>
+<!-- ===== About ===== -->
+<section id="about" class="py-24 lg:pl-24 px-6 max-w-6xl mx-auto reveal">
+  <div class="grid lg:grid-cols-[240px_1fr] gap-10 lg:gap-16">
+    <div>
+      <p class="eyebrow mb-3">01 — About</p>
+      <h2 class="section-heading">Background</h2>
+    </div>
+    <div class="space-y-5 text-paper-muted leading-relaxed max-w-2xl">
+      <p>
+        I'm a graduate student at <strong class="text-paper font-medium">Rice University</strong>, pursuing a Master's in
+        Electrical and Computer Engineering on a <strong class="text-paper font-medium">Fulbright Scholarship</strong>.
+        My work sits at the intersection of RF hardware, FPGA prototyping, and embedded Linux systems.
+      </p>
+      <p>
+        I currently work as an Embedded Software Engineer on the
+        <a href="https://houdini-sdr.org/" target="_blank" class="text-paper link-underline">Houdini Project</a> at Rice's Wireless Lab,
+        building a software-defined radio platform on the RFSoC 4x2 — from custom PLL kernel drivers to
+        multi-rail PCB power design for a phased-array RF front-end.
+      </p>
+      <p>
+        Before Rice, I spent close to three years as an Embedded Software Engineer at
+        <strong class="text-paper font-medium">Polytron</strong>, Indonesia's largest electronics manufacturer, shipping
+        production firmware for consumer appliances and researching IoT connectivity standards.
+      </p>
+      <p>
+        Outside of engineering, I've hiked through <strong class="text-paper font-medium">14 U.S. national parks</strong> so far,
+        with a road trip through the Pacific Northwest, California, and southwest. I document the trips on
+        <a href="https://www.youtube.com/@osugi_w" target="_blank" class="text-paper link-underline">YouTube</a>,
+        and spend a fair amount of time perfecting pour-over coffee.
+      </p>
 
-		</aside>
+      <div class="grid sm:grid-cols-2 gap-4 pt-6">
+        <div class="card p-5">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-signal mb-3">Embedded Software</h3>
+          <ul class="text-sm text-paper-muted space-y-1.5">
+            <li>C/C++, Python</li>
+            <li>Linux kernel modules</li>
+            <li>FreeRTOS, Zephyr RTOS</li>
+            <li>Driver development</li>
+          </ul>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-signal mb-3">RF & Hardware</h3>
+          <ul class="text-sm text-paper-muted space-y-1.5">
+            <li>RFSoC / FPGA (Vivado, PetaLinux)</li>
+            <li>PCB design (Altium, 4-layer)</li>
+            <li>Power sequencing & safety design</li>
+            <li>Frequency & logic analyzers</li>
+          </ul>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-signal mb-3">IoT & Connectivity</h3>
+          <ul class="text-sm text-paper-muted space-y-1.5">
+            <li>BLE, Wi-Fi, OpenThread</li>
+            <li>Matter IoT framework</li>
+            <li>MQTT, cellular (4G)</li>
+          </ul>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-mono text-xs uppercase tracking-wider text-signal mb-3">Wearables & UI</h3>
+          <ul class="text-sm text-paper-muted space-y-1.5">
+            <li>3D design & enclosures</li>
+            <li>LVGL embedded UI</li>
+            <li>Flutter mobile apps</li>
+            <li>Low-power design</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-		<div id="colorlib-main">
-			<section class="colorlib-about" data-section="about">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-12">
-							<div class="row row-bottom-padded-sm">
-								<div class="col-md-12">
-									<div class="about-desc">
-										<span class="heading-meta">Introduction</span>
-										<h2 class="colorlib-heading">About Me</h2>
-										
-										<p><strong>Sugiarto</strong> is a Graduate Student at <strong>Rice University</strong>, pursuing a Master’s in Electrical and Computer Engineering. His expertise sits at the intersection of Computer Architecture and Wearable Technology, with a deep technical focus on FPGA prototyping, RISC-V systems, and high-performance embedded design.</p>
-                                
-										<p>Currently, he is working as an Embedded Software Engineer for the <a href="https://houdini-sdr.org/" target="_blank"><strong>Houdini Project</strong></a> within the Rice Wireless Lab. In this role, he contributes to advanced FPGA designs on <strong>RFSoC Gen III</strong> platforms, creates custom Linux distributions, and develops driver support for X-band development kit components, ensuring seamless hardware-software integration.</p>
-										
-										<p>Alongside his research, he is spearheading a Capstone project, <a href="https://github.com/osugiw/cp_wearable_ai"><strong>Sally: a wearable AI assistant</strong></a> designed to assist Alzheimer's patient navigating their daily life safely.</p>
-										
-										<p>Before Rice, Sugiarto spent several years as an Embedded Software Engineer at <strong>Polytron Indonesia</strong>, the nation's largest electronics manufacturer. This industry background taught him how to scale IoT solutions from prototypes to mass production. Today, he is dedicated to leveraging that experience to build the next generation of assistive wearables.</p>
+<!-- ===== Experience ===== -->
+<section id="experience" class="py-24 lg:pl-24 px-6 max-w-6xl mx-auto reveal">
+  <div class="grid lg:grid-cols-[240px_1fr] gap-10 lg:gap-16">
+    <div>
+      <p class="eyebrow mb-3">02 — Experience</p>
+      <h2 class="section-heading">Work History</h2>
+    </div>
+    <div class="space-y-10 max-w-2xl">
 
-										<p>When he isn't optimizing firmware, you’ll likely find him capturing memories through his <a href="https://www.youtube.com/@osugi_w" target="_blank"><strong>YouTube channel</strong></a>, documenting his journey from the streets of New York and Chicago to the hiking trails of National Parks. Back at home, he is a dedicated barista and chef, perfecting everything from a precise V60 pour-over to experiments with cooking.</p>
-									</div>
-								</div>
-							</div>
+      <article class="border-l-2 border-copper pl-6 relative">
+        <span class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-copper"></span>
+        <p class="font-mono text-xs text-paper-faint mb-1">May 2026 — Jul 2026</p>
+        <h3 class="font-display text-xl text-paper mb-2">
+          <a href="https://houdini-sdr.org/index.html" target="_blank" class="link-underline">Embedded Software Engineer Intern</a>
+        </h3>
+        <p class="text-sm text-signal mb-3">Wireless Lab, Rice University · Houston, TX</p>
+        <p class="text-paper-muted text-sm mb-3">Designing and building a software-defined radio system on the Xilinx/AMD RFSoC 4x2, spanning embedded Linux, FPGA, RF, and power electronics.</p>
+        <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
+          <li>Built custom Linux and Python (PYNQ) drivers for PLL frequency control, with dedicated test software for functional validation</li>
+          <li>Used frequency and logic analyzers to debug signal integrity and confirm RF performance</li>
+          <li>Verified full RF signal chain at X-band (10 GHz)</li>
+          <li>Designed a 4-layer PCB (Altium) for powering a phased-array RF front-end, including multi-rail sequencing and safety protection</li>
+        </ul>
+      </article>
 
-							<div class="row">
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-									<div class="services color-1">
-										<span class="icon2"><i class="icon-params"></i></span>
-										<h3>Embedded Software</h3>
-										<ul class="skill-list" style="list-style: none; padding: 0; margin: 0; font-size: 13px;">
-											<li>• C/C++, Python Programming</li>
-											<li>• FreeRTOS</li>
-											<li>• Zephyr RTOS</li>
-											<li>• Driver Development</li>
-											<li>• Linux Kernel Module</li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInRight">
-									<div class="services color-2">
-										<span class="icon2"><i class="icon-watch"></i></span>
-										<h3>Wearable Devices</h3>
-										<ul class="skill-list" style="list-style: none; padding: 0; margin: 0; font-size: 13px;">
-											<li>• 3D Design</li>
-											<li>• Low-power design</li>
-											<li>• Flutter Mobile Application</li>
-											<li>• LVGL UI design for Embedded display</li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInTop">
-									<div class="services color-3">
-										<span class="icon2"><i class="icon-data"></i></span>
-										<h3>IoT Systems</h3>
-										<ul class="skill-list" style="list-style: none; padding: 0; margin: 0; font-size: 13px;">
-											<li>• BLE, WiFi, OpenThread communication</li>
-											<li>• Matter IoT framework</li>
-											<li>• MQTT protocol</li>
-											<li>• Backend server hosting</li>
-										</ul>
-									</div>
-								</div>
-								<div class="col-md-3 animate-box" data-animate-effect="fadeInBottom">
-									<div class="services color-4">
-										<span class="icon2"><i class="icon-coffee"></i></span>
-										<h3>Coffee Brewing</h3>
-										<ul class="skill-list" style="list-style: none; padding: 0; margin: 0; font-size: 13px;">
-											<li>• V60</li>
-											<li>• Mokapot</li>
-											<li>• Espresso</li>
-											<li>• Vietnam Drip</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+      <article class="border-l-2 border-ink-line pl-6 relative">
+        <span class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-ink-line"></span>
+        <p class="font-mono text-xs text-paper-faint mb-1">Aug 2022 — Apr 2025</p>
+        <h3 class="font-display text-xl text-paper mb-2">
+          <a href="https://polytron.co.id/" target="_blank" class="link-underline">Embedded Software Engineer</a>
+        </h3>
+        <p class="text-sm text-signal mb-3">Polytron · Indonesia</p>
+        <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
+          <li>Shipped production firmware for a digital rice cooker (ARM-based MCU) supporting eight cooking modes with adjustable timing</li>
+          <li>Built a wireless test/logging tool for rice cooker and refrigerator data over serial and Bluetooth</li>
+          <li>Developed TFT display visualizations using the LVGL graphics framework</li>
+          <li>Researched BLE, Bluetooth Mesh, OpenThread, and Matter for IoT prototypes</li>
+          <li>Delivered internal MicroPython training and introduced the Matter/OpenThread framework through internal sharing sessions and a student internship program</li>
+        </ul>
+      </article>
 
-			<section class="colorlib-education" data-section="education">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3 ">
-							<span class="heading-meta">Education</span>
-							<h2 class="colorlib-heading ">Education</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-							<div class="fancy-collapse-panel">
-								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="edu_one">
-									        <h4 class="panel-title">
-									            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-													Master in Electrical and Computer Engineering
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="edu_one">
-									        <div class="panel-body">
-									        	<div class="row">
-										      		<div class="col-md-6">
-										      			<p>
-															With the <a href= "https://www.fulbrightprogram.org/">Fulbright Scholarship</a>, I am pursuing my master's study at <a href="https://eceweb.rice.edu/academics/graduate-programs/mece-program">Rice University</a>, Houston, Texas, United States, since August 2025.
-															My major is Electrical and Computer Engineering with specialization in computer engineering that focuses on wearable devices and embedded systems.
-															<br> Starting Spring 2026, I am working towards my capstone project about <a href="https://github.com/osugiw/cp_wearable_ai">wearable AI assistant</a> that used for assisting Alzheimer's people to recognize activities and provide feedback to help the patients safe.
-															<br> During Summer 2026, I work on Houdini Project as an Embedded Software intern at Wireless lab 
-														</p>
-										      		</div>
-										      		<div class="col-md-6">
-										      			<p>Notable Activities:</p>
-														<ul>
-															<li>Current GPA: 3.94/4.0</li>
-															<li>Summer 2026 - Embedded Sw Intern at Wireless Lab working on <a href="https://houdini-sdr.org/">Houdini Project</a> supervised by <a href="https://houdini-sdr.org/pages/people.html">Andrew Sedlmayr and Ashutosh Sabharwal</a> </li>
-															<li>Research assistant at Phi Lab developing <a href="https://github.com/osugiw/cp_wearable_ai">Sally: Wearable AI assistant</a> supervised by <a href="https://nakulg.com/">Prof. Nakul Garg</a></li>
-															<li>Volunteered in GREAT Project in 2025, a cultural event introducing Mexico's culture, by assisting special needs audiences.</li>
-															<li><a href="https://www.aminef.or.id/sugiarto-wibowo/">My profile at Fulbright Indonesia</a></li>
-															<li><a href="https://fulbright.rice.edu/people/sugiarto-wibowo">My profile at Fulbright@Rice</a></li>
-														</ul>
-										      		</div>
-									         </div>
-									        </div>
-									    </div>
-									</div>
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="edu_two">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-													Bachelor Degree of Electrical Engineering
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu_two">
-									         <div class="panel-body">
-									            <div class="row">
-										      		<div class="col-md-6">
-										      			<p>Graduated in 2022 from <strong><a href="https://electrical.petra.ac.id/">Petra Christian University</a></strong>, Surabaya, East Java, Indonesia Focus in <strong>Robotics and Electronics.</strong></p>
-										      		</div>
-										      		<div class="col-md-6">
-										      			<p>Notable Activities:</p>
-														<ul>
-															<li>Dean's List, <strong>3.86</strong></li>
-															<li>Part of the <strong>laboratory assistant for almost three years</strong>.</li>
-															<li><strong>Ministry of Education, Culture, Research, and Technology, Indonesia funding:</strong> Created a prototype system to evacuate people in multi-story buildings when earthquake appears.</li>
-															<li><strong>2nd winner in International Electrical Engineering Competition</strong> by Faculty of Industral Engineering, Petra Christian University: Invented a wearable device to track COVID-19 patient' oxygen and heartbeat, and monitored by hospitals.</li>
-															<li>Joined an <strong>student organization</strong>, namely HIMATEKTRA as a member of Human Resource and Development in the first period and as Head of Research and Development in the second period.</li>
-															<li>Appointed as <strong>a team leader</strong> consisted of 10 people to create events that could educate people around Surabaya due to COVID-19 hit the economy.</li>
+      <article class="border-l-2 border-ink-line pl-6 relative">
+        <span class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-ink-line"></span>
+        <p class="font-mono text-xs text-paper-faint mb-1">Jul 2021 — Dec 2021</p>
+        <h3 class="font-display text-xl text-paper mb-2">
+          <a href="http://www.unicodeindonesia.com/" target="_blank" class="link-underline">R&D Engineer Intern</a>
+        </h3>
+        <p class="text-sm text-signal mb-3">Unicode · Indonesia</p>
+        <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
+          <li>Built a GPS vehicle tracking system reporting driver location over 4G to a geofencing server</li>
+          <li>Converted a manual attendance system into automatic Bluetooth-based detection using the Room Assistant framework</li>
+          <li>Implemented YOLO gesture recognition on an SBC for camera-based human-computer interaction</li>
+        </ul>
+      </article>
 
-														</ul>
-										      		</div>
-									         </div>
-									    </div>
-									</div>
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="edu_three">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-													High School Major of Natural Science
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu_three">
-									        <div class="panel-body">
-									            <p>Graduated in 2018 from <strong>Karangturi National High School</strong>, Semarang, Central Java, Indonesia</p>
-											</div>
-									    </div>
-									</div>
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="edu_four">
-									        <h4 class="panel-title">
-									            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Google Project Management Specialization
-									            </a>
-									        </h4>
-									    </div>
-									    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="edu_four">
-									        <div class="panel-body">
-									            <div class="row">
-													<div class="col-md-6">
-														<p>Funded by the Ministry of Communication and Information Technology of the Republic of Indonesia to study<a href="https://coursera.org/share/3f5385c21eb335b05f5a5a0cb3ab19c7"> Google Project Management</a> course developed by Google and was taught through the Coursera Platform</p>
-													</div>
-													<div class="col-md-6">
-														<p>Key activities:</p>
-														<ul>
-															<li>Estimating time and budgets</li>
-															<li>Running effective meetings and managing stakeholders</li>
-															<li>Identifying and managing risks</li>
-															<li>Applying Agile and Scrum frameworks</li>
-															<li>Leadership skills and navigating team dynamics</li>
-														</ul>
-													</div>
-												</div>
-									        </div>
-									    </div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+      <article class="border-l-2 border-ink-line pl-6 relative">
+        <span class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-ink-line"></span>
+        <p class="font-mono text-xs text-paper-faint mb-1">Sep 2019 — 2022</p>
+        <h3 class="font-display text-xl text-paper mb-2">
+          <a href="https://electrical.petra.ac.id/" target="_blank" class="link-underline">Electronics Laboratory Assistant</a>
+        </h3>
+        <p class="text-sm text-signal mb-3">Petra Christian University</p>
+        <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
+          <li>Supervised practicums in digital electronics, microprocessors, machine vision, and robotics</li>
+          <li>Developed an FPGA learning module (Xilinx PYNQ-Z2) covering I/O and PWM generation</li>
+          <li>Built a training module for collaborative robots sorting objects via industrial camera</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
 
-			<section class="colorlib-experience" data-section="experience">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
-							<span class="heading-meta">Experience</span>
-							<h2 class="colorlib-heading">Work Experience</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12">
-				         <div class="timeline-centered">
+<!-- ===== Work / Projects ===== -->
+<section id="work" class="py-24 lg:pl-24 px-6 max-w-6xl mx-auto reveal">
+  <div class="grid lg:grid-cols-[240px_1fr] gap-10 lg:gap-16">
+    <div>
+      <p class="eyebrow mb-3">03 — Selected Work</p>
+      <h2 class="section-heading">Projects</h2>
+    </div>
+    <div>
+      <div class="grid sm:grid-cols-2 gap-5">
 
-							<article class="timeline-entry">
-								<div class="timeline-entry-inner">
+        <a href="https://github.com/osugiw/cp_wearable_ai" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · Wearable Device</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">Sally: Wearable AI Assistant</h3>
+          <p class="text-sm text-paper-muted">Capstone project assisting Alzheimer's patients with daily activity recognition and safety feedback.</p>
+        </a>
 
-									<div class="timeline-icon color-2">
-										<i class="icon-pen2"></i>
-									</div>
+        <a href="https://www.hackster.io/the-owl-tonomous-aviators/the-owl-tonomous-aviators-6a67da" target="_blank" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · Robotics</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">Autonomous Lane Keeping Car</h3>
+          <p class="text-sm text-paper-muted">Vision-based lane detection and control for autonomous vehicle navigation.</p>
+        </a>
 
-									<div class="timeline-label">
-										<h2><a href="https://houdini-sdr.org/index.html">Embedded Software Developer Intern at Wireless Lab in Rice University, Houston</a> <span>May 2026 - July 2026</span></h2>
-										<div>
-											Designing and building a software-defined radio system on the Xilinx/AMD RFSoC 4x2, spanning embedded Linux, FPGA, RF, and power electronics.
+        <a href="https://github.com/osugiw/elec537_robotcar" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · IoT</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">Assistive Robot in Low-Visibility Conditions</h3>
+          <p class="text-sm text-paper-muted">Sensor-driven navigation assistance for degraded-visibility environments.</p>
+        </a>
 
-											<li>Built custom Linux and Python (PYNQ) drivers for PLL frequency control, with dedicated test software for functional validation</li>
-											<li>Used frequency and logic analyzers to debug signal integrity and confirm RF performance</li>
-											<li>Verified full RF signal chain at X-band (10 GHz)</li>
-											<li>Designed a 4-layer PCB (Altium) for powering a phased-array RF front-end, including multi-rail sequencing and safety protection</li>
-										</div>
-									</div>
-								</div>
-							</article>
+        <a href="https://github.com/osugiw/customized_micropython" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · IoT</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">Customizing MicroPython Firmware</h3>
+          <p class="text-sm text-paper-muted">Internal C modules and frozen module customization for embedded MicroPython builds.</p>
+        </a>
 
-							<article class="timeline-entry">
-								<div class="timeline-entry-inner">
+        <a href="projects/alzo.html" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · IoT</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">ALZO: Outdoor Patient Tracking</h3>
+          <p class="text-sm text-paper-muted">IoT tracking system for Alzheimer's patients outside the home — published in TELKOMNIKA.</p>
+        </a>
 
-									<div class="timeline-icon color-1">
-										<i class="icon-pen2"></i>
-									</div>
+        <a href="projects/motorcycle_tracking.html" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · IoT</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">GPS Tracking System for Motorcycles</h3>
+          <p class="text-sm text-paper-muted">Cellular-connected GPS tracking with server-side geofencing.</p>
+        </a>
 
-									<div class="timeline-label">
-										<h2><a href="https://polytron.co.id/">Embedded Software Engineer at Polytron, Indonesia</a> <span>August 2022 - April 2025</span></h2>
-										<div>
-											<li>Transform the digital rice cooker requirements from the product manager into a fully functional and user-friendly product by creating robust and optimized C/C++ software in the arm-based microcontroller. The final product can cook eight menus based on the user input, and each menu has a different cooking method and heat temperature. Some cooking time menus can be adjusted with limited hours, and the user can monitor the remaining time displayed on the seven segments.</li>
-											<li>Build a tool device for testing and logging the digital rice cooker and refrigerator data through serial communication. The data can be transmitted wirelessly through Bluetooth.</li>
-											<li>Convert refrigerator data into an attractive, user-friendly visual using a TFT (Thin Film Transistor) display and an LVGL graphic framework.</li>
-											<li>Research on wireless technologies for Internet of Things applications, including Bluetooth Low Energy, Bluetooth Mesh, OpenThread, and Matter Protocol. Then, implement the newly acquired knowledge into an IoT prototype.</li>
-											<li>Contribute to the software team skills development by delivering practical training material about Micropython programming for embedded applications. The topics range from basic to advanced, including customizing firmware and embedded libraries (frozen module, external C modules, native machine module).</li>
-											<li>Introducing the new standardized IoT framework: Matter and OpenThread protocol that can be implemented to Polytron products through a sharing session. Also, implement the concepts into the internship program for the university student and create a prototype of a Matter-enabled air conditioner.</li>
-											<li>Implement an Agile project management tool for executing projects using Kanban Board, along with the project documentation using Microsoft Word and software versioning using GitLab.</li>
-										</div>
-									</div>
-								</div>
-							</article>
+        <a href="projects/sign_language.html" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">AI · Embedded</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">Sign Language Detection (YOLOv5)</h3>
+          <p class="text-sm text-paper-muted">Real-time hand symbol classification for human-computer interaction — published in COMMIT.</p>
+        </a>
 
-							<article class="timeline-entry">
-								<div class="timeline-entry-inner">
-									<div class="timeline-icon color-2">
-										<i class="icon-pen2"></i>
-									</div>
-									<div class="timeline-label">
-									<h2><a href="http://www.unicodeindonesia.com/">R&D Engineer Intern at Unicode, Indonesia</a> <span>July - December 2021</span></h2>
-										<div>
-										<li>Create a vehicle tracking system for monitoring the driver’s location based on a GPS module integrated into the device. The location data is then sent to the server through cellular communication (4G), and the data is processed further by the server to check whether the driver is out of the working area.</li>
-										<li>Improve the existing manual employee attendance system into an automatic attendance system by detecting the employees’ devices through Bluetooth scanning performed by several wireless Single Board Computer (SBC) stations and utilizing the Room Assistant framework.</li>
-										<li>Implement a state-of-the-art computer vision algorithm on SBC, YOLO, for human-computer interaction purposes by classifying hand gestures captured by the camera, and the detected gesture can trigger commands on the computer.</li>
-										</div>
-									</div>
-								</div>
-							</article>
+        <a href="projects/wireless_attendance.html" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · IoT</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">Wireless Employee Attendance</h3>
+          <p class="text-sm text-paper-muted">Automatic Bluetooth-based attendance detection across distributed SBC stations.</p>
+        </a>
 
-							<article class="timeline-entry">
-								<div class="timeline-entry-inner">
-									<div class="timeline-icon color-3">
-										<i class="icon-pen2"></i>
-									</div>
-									<div class="timeline-label">
-									<h2><a href="https://electrical.petra.ac.id/">Electronics Laboratory Assistant at Petra Christian University</a> <span>September 2019-2022</span></h2>
-										<ul>
-										<li>Prepare and supervise basic electronics, digital electronics, microprocessor systems, machine vision, and robotics project practicums. </li>
-										<li>Develop a learning module for practicum about basic FPGA programming using Xilinx Pynq-Z2. The hands-on lab included controlling output, reading input, and generating PWM signals for moving servo. </li>
-										<li>Develop a training module of collaborative robots using Universal Robots to sort and move objects in conveyors using an industrial camera.</li>
-										</ul>
-									</div>
-								</div>
-							</article>
+        <a href="projects/cofight.html" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · IoT</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">CoFight — COVID-19 Wristband</h3>
+          <p class="text-sm text-paper-muted">Wearable IoT device for oxygen and heart rate monitoring during the pandemic.</p>
+        </a>
 
-							<article class="timeline-entry begin">
-								<div class="timeline-entry-inner">
-									<div class="timeline-icon color-none">
-									</div>
-								</div>
-							</article>
-					      </div>
-					   </div>
-				   </div>
-				</div>
-			</section>
+        <a href="https://github.com/elektronikapetra/praktikum-emsys" target="_blank" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">FPGA with PYNQ-Z2</h3>
+          <p class="text-sm text-paper-muted">Teaching lab modules for FPGA I/O, PWM generation, and digital logic fundamentals.</p>
+        </a>
 
-			<section class="colorlib-work" data-section="work">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
-							<h2 class="colorlib-heading">Recent Work</h2>
-						</div>
-					</div>
+        <div class="card p-5">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Robotics · Computer Vision</p>
+          <h3 class="font-display text-lg text-paper mb-2">Collaborative Robot for Item Sorting</h3>
+          <p class="text-sm text-paper-muted">Universal Robots arm with industrial camera vision for automated sorting on a conveyor.</p>
+        </div>
+      </div>
 
-					<div class="row">
-						<div class="col-md-4">
-							<a href="https://github.com/osugiw/cp_wearable_ai">
-								<div class="project" style="background-image: url(projects/sally_logo.png);">
-									<div class="desc"><div class="con"><span>Embedded Programming | Wearable Device</span></div></div>
-								</div>
-							</a>
-							<h4>Sally: Wearable AI Assistant</h4>
-						</div>
-						<div class="col-md-4">
-							<a href="https://www.hackster.io/the-owl-tonomous-aviators/the-owl-tonomous-aviators-6a67da">
-								<div class="project" style="background-image: url(https://hackster.imgix.net/uploads/attachments/1952402/whatsapp_image_2026-04-30_at_3_33_40_pm_XVPO5ZNHu1.jpeg?auto=compress%2Cformat&w=740&h=555&fit=max);">
-									<div class="desc"><div class="con"><span>Embedded Programming | Robotics</span></div></div>
-								</div>
-							</a>
-							<h4>Autonomous Lane Keeping Car</h4>
-						</div>
-					</div>
+      <a href="https://trailblazing-tech.github.io/" target="_blank" class="mt-8 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">
+        More work archive ↗
+      </a>
+    </div>
+  </div>
+</section>
 
-					<div class="row">
-						<div class="col-md-4">
-							<a href="https://github.com/osugiw/elec537_robotcar">
-								<div class="project" style="background-image: url(projects/assistive-robot-in-low-visibility-env.png);">
-									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
-								</div>
-							</a>
-							<h4>Assistive Robot in Low-Visibility Conditions</h4>
-						</div>
-						<div class="col-md-4">
-							<a href="https://github.com/osugiw/customized_micropython">
-								<div class="project" style="background-image: url(projects/micropython/Micropython.png);">
-									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
-								</div>
-							</a>
-							<h4>Customizing Internal of Micropython Firmware</h4>
-						</div>
-						<div class="col-md-4">
-							<a href="projects/alzo.html">
-								<div class="project" style="background-image: url(projects/alzo/Web_Project_BG_Alzo.jpg);">
-									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
-								</div>
-							</a>
-							<h4>Outdoor Alzheimer's Patient Tracking System</h4>
-						</div>
-					</div>
+<!-- ===== Education ===== -->
+<section id="education" class="py-24 lg:pl-24 px-6 max-w-6xl mx-auto reveal">
+  <div class="grid lg:grid-cols-[240px_1fr] gap-10 lg:gap-16">
+    <div>
+      <p class="eyebrow mb-3">04 — Education</p>
+      <h2 class="section-heading">Academics</h2>
+    </div>
+    <div class="space-y-8 max-w-2xl">
 
-					<div class="row" style="margin-top: 30px;">
-						<div class="col-md-4">
-							<a href="projects/motorcycle_tracking.html">
-								<div class="project" style="background-image: url(projects/motorcycle_tracking/Hardware_Top.jpg);">
-									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
-								</div>
-							</a>
-							<h4>IoT GPS Tracking System for Motorcycle</h4>
-						</div>
-						<div class="col-md-4">
-							<a href="projects/sign_language.html">
-								<div class="project" style="background-image: url(projects/sign_language/Highlight.jpg);">
-									<div class="desc"><div class="con"><span>AI | Embedded Programming</span></div></div>
-								</div>
-							</a>
-							<h4>Sign Language Detection using YOLOv5</h4>
-						</div>
-						<div class="col-md-4">
-							<a href="projects/wireless_attendance.html">
-								<div class="project" style="background-image: url(projects/wireless_attendance/Overview.png);">
-									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
-								</div>
-							</a>
-							<h4>Wireless Employee Attendance</h4>
-						</div>
-					</div>
+      <div class="card p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+          <h3 class="font-display text-lg text-paper">MECE, Electrical & Computer Engineering</h3>
+          <span class="font-mono text-xs text-paper-faint">2025 — 2027</span>
+        </div>
+        <p class="text-sm text-signal mb-3">Rice University · Fulbright Scholar</p>
+        <p class="text-sm text-paper-muted mb-3">Specializing in computer engineering, with a focus on wearable devices and embedded systems. Current GPA: 3.94/4.0.</p>
+        <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
+          <li>Capstone: <a href="https://github.com/osugiw/cp_wearable_ai" class="link-underline text-paper">Sally, a wearable AI assistant</a> for Alzheimer's patient safety</li>
+          <li>Summer 2026 — Embedded SW Intern, <a href="https://houdini-sdr.org/" target="_blank" class="link-underline text-paper">Houdini Project</a>, Wireless Lab</li>
+          <li>Research assistant at Phi Lab under <a href="https://nakulg.com/" target="_blank" class="link-underline text-paper">Prof. Nakul Garg</a></li>
+          <li>Leadership Member, Fulbright@Rice — <a href="https://fulbright.rice.edu/people/sugiarto-wibowo" target="_blank" class="link-underline text-paper">profile</a> · <a href="https://www.aminef.or.id/sugiarto-wibowo/" target="_blank" class="link-underline text-paper">Fulbright Indonesia profile</a></li>
+        </ul>
+      </div>
 
-					<div class="row" style="margin-top: 30px;">
-						<div class="col-md-4">
-							<a href="projects/cofight.html">
-								<div class="project" style="background-image: url(projects/cofight/Cofight.png);">
-									<div class="desc"><div class="con"><span>Embedded Programming | IoT</span></div></div>
-								</div>
-							</a>
-							<h4>CoFight - COVID-19 Wristband IoT Device</h4>
-						</div>
-						<div class="col-md-4">
-							<a href="https://github.com/elektronikapetra/praktikum-emsys">
-								<div class="project" style="background-image: url(projects/fpga_pynqz2/Overview.jpg);">
-									<div class="desc"><div class="con"><span>Embedded Programming</span></div></div>
-								</div>
-							</a>
-							<h4>FPGA with Pynq-Z2</h4>
-						</div>
-						<div class="col-md-4">
-							<div class="project" style="background-image: url(projects/ur_camera/Overview.jpg);">
-								<div class="desc"><div class="con"><span>Robotics | Computer Vision</span></div></div>
-							</div>
-							<h4>Collaborative Robot for Items Sorting</h4>
-						</div>
-					</div>
+      <div class="card p-6">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+          <h3 class="font-display text-lg text-paper">B.Eng. Electrical Engineering</h3>
+          <span class="font-mono text-xs text-paper-faint">2018 — 2022</span>
+        </div>
+        <p class="text-sm text-signal mb-3">Petra Christian University · Surabaya, Indonesia</p>
+        <p class="text-sm text-paper-muted mb-3">Focus in robotics and electronics. Dean's List, GPA 3.86.</p>
+        <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
+          <li>Ministry of Education (Indonesia) funded project — multi-story building evacuation system for earthquakes</li>
+          <li>2nd place, International Electrical Engineering Competition — wearable COVID-19 patient monitor</li>
+          <li>Head of Research & Development, HIMATEKTRA student organization</li>
+        </ul>
+      </div>
 
-					<div class="row" style="margin-top: 70px; margin-bottom: 50px;">
-						<div class="col-md-12" data-animate-effect="fadeInUp">
-							<p style="text-align: center;">
-								<a class="btn btn-primary btn-lg" href="https://trailblazing-tech.github.io/" 
-								style="padding: 20px 45px; font-size: 22px; font-weight: 700; border-radius: 12px; display: inline-block; text-decoration: none; letter-spacing: 1px;">
-									More Work can be found here
-								</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</section>
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="card p-5">
+          <h3 class="font-display text-base text-paper mb-1">High School, Natural Science</h3>
+          <p class="text-sm text-paper-muted">Karangturi National High School, Semarang, Indonesia — 2018</p>
+        </div>
+        <div class="card p-5">
+          <h3 class="font-display text-base text-paper mb-1">Google Project Management</h3>
+          <p class="text-sm text-paper-muted">Coursera specialization, funded by Indonesia's Ministry of Communication and Information Technology</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-			<section class="colorlib-work" data-section="certification">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3  "   >
-							<h2 class="colorlib-heading  ">Professional Certification</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12  "   >
-							<div class="fancy-collapse-panel">
-								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="edu_two">
-									        <h4 class="panel-title">
-									            <a data-toggle="collapse" data-parent="#publication" href="#collapseCertification" aria-expanded="true" aria-controls="collapseCertification">Specialisation</a>
-									        </h4>
-									    </div>
-									    <div id="collapseCertification" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="edu_two">
-									         <div class="panel-body">
-									            <div class="row">
-										      		<div class="col-md-12">
-														<ul>
-															<li>
-																ACA Cloud Computing Certification, Valid: 2024-2026 (Credential:<a href="https://drive.google.com/file/d/1Kju89IH15iehfx7tp1FIoTnB6eCy8imq/view">IACA01240200111575L</a>)
-															</li>
-															<li>
-																Huawei Certified ICT Associate Artificial Intelligence, Valid: 2022-2025 (Credential:<a href="https://drive.google.com/file/d/1dgwKovjl1hWxMIfyAEpH717m3JqYwD4y/view">010102001808858531982656</a>)
-															</li>
-														</ul>
-										      		</div>
-										      	</div>
-									         </div>
-									    </div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+<!-- ===== Publications & Certifications ===== -->
+<section id="writing" class="py-24 lg:pl-24 px-6 max-w-6xl mx-auto reveal">
+  <div class="grid lg:grid-cols-[240px_1fr] gap-10 lg:gap-16">
+    <div>
+      <p class="eyebrow mb-3">05 — Record</p>
+      <h2 class="section-heading">Publications & Patents</h2>
+    </div>
+    <div class="max-w-2xl space-y-10">
+      <div>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Publications</h3>
+        <ul class="space-y-3 text-sm text-paper-muted">
+          <li class="flex gap-3"><span class="text-copper">—</span><span>Hand Symbol Classification for Human-Computer Interaction Using the Fifth Version of YOLO Object Detection — <a href="https://journal.binus.ac.id/index.php/commit/article/view/8520" target="_blank" class="link-underline text-paper">PDF</a></span></li>
+          <li class="flex gap-3"><span class="text-copper">—</span><span>ALZO: An Outdoor Alzheimer's Patient Tracking System Using Internet of Things — <a href="http://telkomnika.uad.ac.id/index.php/TELKOMNIKA/article/view/25156" target="_blank" class="link-underline text-paper">PDF</a></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Patents (Indonesia DJIP)</h3>
+        <ul class="space-y-3 text-sm text-paper-muted">
+          <li class="flex gap-3"><span class="text-copper">—</span><span>Alat Pemantau Aktivitas Pasien Demensia di Luar Rumah — <a href="https://pdki-indonesia.dgip.go.id/search?nomor=S00202210777&type=patent&keyword=ALAT+PEMANTAU+AKTIVITAS+PASIEN+DEMENSIA+DI+LUAR+RUMAH&id=238d438ac80a7d6564b3ca855e71b7067f98cceb8cca70130ca4c97205aec4fa&page=1" target="_blank" class="link-underline text-paper">DJIP</a></span></li>
+          <li class="flex gap-3"><span class="text-copper">—</span><span>Metode pada Perangkat Elektronik untuk Memantau Aktivitas Orang Dengan Demensia di Luar Rumah — <a href="https://pdki-indonesia.dgip.go.id/search?nomor=S00202210777&type=patent&keyword=Metode+pada+Perangkat+Elektronik+yang+Digunakan+untuk+Memantau+Aktivitas+Orang+Dengan+Demensia+di+Luar+Rumah&id=8a4808dd9641d2f5228bb7e39931de3542322b90b7605ba32bcf355edd51c742&page=1" target="_blank" class="link-underline text-paper">DJIP</a></span></li>
+          <li class="flex gap-3"><span class="text-copper">—</span><span>Sistem Automasi Bangunan Berbasis IoT dan AI untuk Evakuasi Korban Gempa — <a href="https://pdki-indonesia.dgip.go.id/search?type=patent&keyword=sistem+automasi+pada+bangunan+bertingkat&id=2bf0208c3d8733d0390c2e63ce202b33598c757a3594deb00daaf5b4df29d6d8%3Fnomor%3DS00202004935&page=1" target="_blank" class="link-underline text-paper">DJIP</a></span></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Certifications</h3>
+        <ul class="space-y-3 text-sm text-paper-muted">
+          <li class="flex gap-3"><span class="text-copper">—</span><span>ACA Cloud Computing Certification, 2024–2026 — <a href="https://drive.google.com/file/d/1Kju89IH15iehfx7tp1FIoTnB6eCy8imq/view" target="_blank" class="link-underline text-paper">IACA01240200111575L</a></span></li>
+          <li class="flex gap-3"><span class="text-copper">—</span><span>Huawei Certified ICT Associate — Artificial Intelligence, 2022–2025 — <a href="https://drive.google.com/file/d/1dgwKovjl1hWxMIfyAEpH717m3JqYwD4y/view" target="_blank" class="link-underline text-paper">010102001808858531982656</a></span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
+</main>
 
-			<section class="colorlib-education" data-section="publication_patent">
-				<div class="colorlib-narrow-content">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3  "   >
-							<h2 class="colorlib-heading  ">Publication & Patent</h2>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12  "   >
-							<div class="fancy-collapse-panel">
-								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="edu_two">
-									        <h4 class="panel-title">
-									            <a data-toggle="collapse" data-parent="#publication" href="#collapsePublication" aria-expanded="true" aria-controls="collapsePublication">Publication</a>
-									        </h4>
-									    </div>
-									    <div id="collapsePublication" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="edu_two">
-									         <div class="panel-body">
-									            <div class="row">
-										      		<div class="col-md-12">
-														<ul>
-															<li>
-																Hand Symbol Classification for Human-Computer Interaction Using the Fifth Version of YOLO Object Detection <a href="https://journal.binus.ac.id/index.php/commit/article/view/8520">(PDF)</a>
-															</li>
-															<li>
-																ALZO: an outdoor Alzheimer's patient tracking system using internet of things <a href="http://telkomnika.uad.ac.id/index.php/TELKOMNIKA/article/view/25156">(PDF)</a>
-															</li>
-														</ul>
-										      		</div>
-										      	</div>
-									         </div>
-									    </div>
-									</div>
-									<div class="panel panel-default">
-									    <div class="panel-heading" role="tab" id="edu_three">
-									        <a data-toggle="collapse" data-parent="#publication" href="#collapsePatent" aria-expanded="false" aria-controls="collapsePatent">Patent</a>
-									    </div>
-									    <div id="collapsePatent" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="edu_three">
-									        <div class="panel-body">
-												<div class="row">
-													<div class="col-md-12">
-														<ul>
-															<li>Alat Pemantau Aktivitas Pasien Demensia di Luar Rumah. <a href="https://pdki-indonesia.dgip.go.id/search?nomor=S00202210777&type=patent&keyword=ALAT+PEMANTAU+AKTIVITAS+PASIEN+DEMENSIA+DI+LUAR+RUMAH&id=238d438ac80a7d6564b3ca855e71b7067f98cceb8cca70130ca4c97205aec4fa&page=1">(DJIP Website)</a></li>
-															<li>Metode pada Perangkat Elektronik yang Digunakan untuk Memantau Aktivitas Orang Dengan Demensia di Luar Rumah. <a href="https://pdki-indonesia.dgip.go.id/search?nomor=S00202210777&type=patent&keyword=Metode+pada+Perangkat+Elektronik+yang+Digunakan+untuk+Memantau+Aktivitas+Orang+Dengan+Demensia+di+Luar+Rumah&id=8a4808dd9641d2f5228bb7e39931de3542322b90b7605ba32bcf355edd51c742&page=1">(DJIP Website)</a></li>
-															<li>Sistem Automasi Bangunan Berbasis Internet Of Things Dan Kecerdasan Buatan Pada Gedung Bertingkat Untuk Mengevakuasi Korban Gempa. <a href="https://pdki-indonesia.dgip.go.id/search?type=patent&keyword=sistem+automasi+pada+bangunan+bertingkat&id=2bf0208c3d8733d0390c2e63ce202b33598c757a3594deb00daaf5b4df29d6d8%3Fnomor%3DS00202004935&page=1">(DJIP Website)</a></li>
-														</ul>
-													</div>
-												</div>
-											</div>
-									    </div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</section>
+<!-- ===== Footer ===== -->
+<footer class="border-t border-ink-line py-14 lg:pl-24 px-6 max-w-6xl mx-auto">
+  <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+    <div>
+      <p class="font-display text-xl text-paper mb-1">Sugiarto Wibowo</p>
+      <p class="font-mono text-xs text-paper-faint">Houston, TX</p>
+    </div>
+    <div class="flex items-center gap-5">
+      <a href="https://github.com/osugiw" target="_blank" aria-label="GitHub" class="text-paper-muted hover:text-copper transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.04-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.1-.75.08-.73.08-.73 1.21.09 1.85 1.24 1.85 1.24 1.08 1.84 2.83 1.31 3.52 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.8 5.62-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.01 2.89-.01 3.29 0 .32.22.7.83.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      </a>
+      <a href="https://www.instagram.com/osugi_w/" target="_blank" aria-label="Instagram" class="text-paper-muted hover:text-copper transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>
+      </a>
+      <a href="https://www.linkedin.com/in/sugiarto-wibowo-osw/" target="_blank" aria-label="LinkedIn" class="text-paper-muted hover:text-copper transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.6 0 4.27 2.37 4.27 5.45v6.29zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+      </a>
+      <a href="https://scholar.google.com/citations?user=nWA4pUsAAAAJ&hl=en" target="_blank" aria-label="Google Scholar" class="text-paper-muted hover:text-copper transition-colors">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 24a7 7 0 0 1-7-7c0-2.58 2.13-4.7 4.71-4.7h.29v-2.31L3.33 6.67 12 0l8.67 6.67L15 10v6c0 4.42-3.58 8-8 8zm0-13.33V10l3.33-2.5L12 5.17l-3.33 2.33 3.33 2.5v.67c-1.47 0-2.67 1.2-2.67 2.66s1.2 2.67 2.67 2.67 2.67-1.2 2.67-2.67c0-1.07-.6-1.93-1.47-2.33z"/></svg>
+      </a>
+      <a href="https://youtube.com/@osugi_w?si=elQx8lnaTgSk8Hkh" target="_blank" aria-label="YouTube" class="text-paper-muted hover:text-copper transition-colors">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.56A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14C4.5 20.5 12 20.5 12 20.5s7.5 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8zM9.6 15.6V8.4l6.4 3.6-6.4 3.6z"/></svg>
+      </a>
+    </div>
+  </div>
+  <p class="font-mono text-[11px] text-paper-faint mt-8">&copy; <span id="year"></span> Sugiarto Wibowo. Built with Tailwind CSS.</p>
+</footer>
 
-		</div><!-- end:colorlib-main -->
-	</div><!-- end:container-wrap -->
-	</div><!-- end:colorlib-page -->
-
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Flexslider -->
-	<script src="js/jquery.flexslider-min.js"></script>
-	<!-- Owl carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- Counters -->
-	<script src="js/jquery.countTo.js"></script>
-	
-	
-	<!-- MAIN JS -->
-	<script src="js/main.js"></script>
-
-	</body>
+<script src="js/site.js"></script>
+</body>
 </html>
-

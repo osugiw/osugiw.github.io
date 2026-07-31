@@ -1,0 +1,43 @@
+@import "./animations.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-ink text-paper font-body antialiased;
+  }
+  ::selection {
+    @apply bg-copper/30 text-paper;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply font-mono text-xs tracking-[0.2em] uppercase text-signal/80;
+  }
+  .section-heading {
+    @apply font-display text-3xl md:text-4xl text-paper font-medium;
+  }
+  .card {
+    @apply bg-ink-surface border border-ink-line rounded-sm;
+  }
+  .pill {
+    @apply font-mono text-[11px] uppercase tracking-wider text-paper-muted border border-ink-line rounded-full px-3 py-1;
+  }
+  .link-underline {
+    @apply underline decoration-copper/40 decoration-1 underline-offset-4 hover:decoration-copper transition-colors;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
