@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Systolic Array Matrix Multiplier on FPGA — Sugiarto Wibowo</title>
+<link rel="shortcut icon" href="../images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="bg-ink">
+
+<header class="border-b border-ink-line">
+  <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="../index.html" class="font-mono text-sm tracking-widest text-paper">SW<span class="text-copper">/</span>01</a>
+    <a href="../index.html#work" class="font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">&larr; All Projects</a>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-6 py-16">
+
+  <p class="eyebrow mb-3">FPGA &middot; Digital Design &middot; ELEC 522 Advanced VLSI (Coursework)</p>
+  <h1 class="font-display text-4xl md:text-5xl text-paper mb-4">Systolic Array Matrix Multiplier on FPGA</h1>
+  <p class="font-display text-xl text-paper-muted mb-8">A 4x4, 16-PE array in Vitis Model Composer, plus a CUDA study and an HLS accelerator on a Zynq board.</p>
+
+  <div class="card p-5 mb-12">
+    <p class="text-sm text-paper-muted leading-relaxed">
+      Individual coursework for Rice ELEC 522 (Fall 2026, Prof. Joseph R. Cavallaro), targeting the AUP-ZU3 board
+      (Zynq UltraScale+ xczu3eg). Problem 1 was verified in simulation and by Vivado timing and resource analysis, not
+      deployed on the board. The HLS accelerator in Part 3 did run on the board.
+    </p>
+  </div>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">The Idea</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      In a systolic array, every processing element (PE) stays in place and, on every clock, does
+      <span class="font-mono text-paper">acc &larr; acc + a_in &times; b_in</span>, then passes <span class="font-mono text-paper">a_in</span> east and
+      <span class="font-mono text-paper">b_in</span> south. The result C(i,j) stays inside the PE that computed it.
+      Row i of A enters i-1 cycles late and column j of B enters j-1 cycles late, so each a<sub>ik</sub> meets its
+      matching b<sub>kj</sub> in the right PE on the right clock edge.
+    </p>
+    <p class="text-paper-muted leading-relaxed mb-6">
+      Example: with A = [1 2; 3 4] and B = [5 6; 7 8], the four accumulators settle to exactly C = [19 22; 43 50],
+      with c11 ready at t=3, c12 and c21 at t=4, and c22 at t=5.
+    </p>
+
+    <svg viewBox="0 0 340 256" class="w-full max-w-md mx-auto rounded-sm border border-ink-line" role="img" aria-label="4 by 4 systolic array: A flows east, B flows south, each PE holds one accumulator" style="background:var(--ink-surface, #0f1724)">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#c8733a"/></marker>
+        <marker id="ab" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#7aa2c8"/></marker>
+      </defs>
+      <g font-family="IBM Plex Mono, monospace" font-size="10" fill="#9aa4b2">
+        <text x="6" y="20">A rows in</text>
+        <text x="130" y="14">B columns in</text>
+      </g>
+      <g stroke="#3a4658" fill="#16202f">
+        <rect x="60" y="30" width="36" height="36" rx="3"/><rect x="130" y="30" width="36" height="36" rx="3"/><rect x="200" y="30" width="36" height="36" rx="3"/><rect x="270" y="30" width="36" height="36" rx="3"/>
+        <rect x="60" y="85" width="36" height="36" rx="3"/><rect x="130" y="85" width="36" height="36" rx="3"/><rect x="200" y="85" width="36" height="36" rx="3"/><rect x="270" y="85" width="36" height="36" rx="3"/>
+        <rect x="60" y="140" width="36" height="36" rx="3"/><rect x="130" y="140" width="36" height="36" rx="3"/><rect x="200" y="140" width="36" height="36" rx="3"/><rect x="270" y="140" width="36" height="36" rx="3"/>
+        <rect x="60" y="195" width="36" height="36" rx="3"/><rect x="130" y="195" width="36" height="36" rx="3"/><rect x="200" y="195" width="36" height="36" rx="3"/><rect x="270" y="195" width="36" height="36" rx="3"/>
+      </g>
+      <g font-family="IBM Plex Mono, monospace" font-size="9" fill="#e6e9ef" text-anchor="middle">
+        <text x="78" y="52">PE11</text><text x="148" y="52">PE12</text><text x="218" y="52">PE13</text><text x="288" y="52">PE14</text>
+        <text x="78" y="107">PE21</text><text x="148" y="107">PE22</text><text x="218" y="107">PE23</text><text x="288" y="107">PE24</text>
+        <text x="78" y="162">PE31</text><text x="148" y="162">PE32</text><text x="218" y="162">PE33</text><text x="288" y="162">PE34</text>
+        <text x="78" y="217">PE41</text><text x="148" y="217">PE42</text><text x="218" y="217">PE43</text><text x="288" y="217">PE44</text>
+      </g>
+      <g stroke="#c8733a" stroke-width="1.5" marker-end="url(#ah)"><line x1="97" y1="48" x2="128" y2="48"/><line x1="167" y1="48" x2="198" y2="48"/><line x1="237" y1="48" x2="268" y2="48"/><line x1="97" y1="103" x2="128" y2="103"/><line x1="167" y1="103" x2="198" y2="103"/><line x1="237" y1="103" x2="268" y2="103"/><line x1="97" y1="158" x2="128" y2="158"/><line x1="167" y1="158" x2="198" y2="158"/><line x1="237" y1="158" x2="268" y2="158"/><line x1="97" y1="213" x2="128" y2="213"/><line x1="167" y1="213" x2="198" y2="213"/><line x1="237" y1="213" x2="268" y2="213"/><line x1="30" y1="48" x2="58" y2="48"/><line x1="30" y1="103" x2="58" y2="103"/><line x1="30" y1="158" x2="58" y2="158"/><line x1="30" y1="213" x2="58" y2="213"/></g>
+      <g stroke="#7aa2c8" stroke-width="1.5" marker-end="url(#ab)"><line x1="78" y1="67" x2="78" y2="83"/><line x1="78" y1="122" x2="78" y2="138"/><line x1="78" y1="177" x2="78" y2="193"/><line x1="148" y1="67" x2="148" y2="83"/><line x1="148" y1="122" x2="148" y2="138"/><line x1="148" y1="177" x2="148" y2="193"/><line x1="218" y1="67" x2="218" y2="83"/><line x1="218" y1="122" x2="218" y2="138"/><line x1="218" y1="177" x2="218" y2="193"/><line x1="288" y1="67" x2="288" y2="83"/><line x1="288" y1="122" x2="288" y2="138"/><line x1="288" y1="177" x2="288" y2="193"/><line x1="78" y1="20" x2="78" y2="28"/><line x1="148" y1="20" x2="148" y2="28"/><line x1="218" y1="20" x2="218" y2="28"/><line x1="288" y1="20" x2="288" y2="28"/></g>
+      <g font-family="IBM Plex Mono, monospace" font-size="9">
+        <text x="60" y="246" fill="#c8733a">A flows east</text>
+        <text x="160" y="246" fill="#7aa2c8">B flows south</text>
+      </g>
+    </svg>
+    <p class="font-mono text-xs text-paper-faint text-center mt-2">The 4x4 array. Each PE keeps its own accumulator, and the staggered inputs enter along the top and left edges.</p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Design Decisions</h2>
+    <div class="space-y-5">
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Right-shift unload</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">The assignment forbade RAM readout and large multiplexers. I added one 2:1 mux per PE so a single <span class="font-mono">unload</span> pulse makes every PE load its settled result into its east-forwarding register, and the values then shift out through four row pins. Output pins fall from 256 (one per PE) to 64, a 75% cut, and the design uses 195 pins in total. For row 1 (C = 6, 4, 6, 4) the pin reads 4, 6, 4, 6 over four cycles, and the host reverses it.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Choosing not to build the faster option</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">I analyzed a diagonal-shift unload in full. It would drain in 2 cycles instead of 4, but pipelined throughput is limited by the 12-cycle settle time, so both schemes give 12 cycles per matrix. It needed three times the output pins and a new debug cycle for no gain in the metric that matters, so I did not build it.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Matrix-vector mode for three muxes</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">y = A x is the same hardware with the vector in column 1 of B and zeros elsewhere. Gating only the top of columns 2 to 4 zeroes everything below for free, so it costs 3 muxes, 1 pin, and no extra latency (exactly +48 LUTs). The tradeoff, stated plainly: the 12 unused PEs still compute against zero, so there is no power saving.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Back-to-back pipelining</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">Because <span class="font-mono">reset</span> and <span class="font-mono">unload</span> touch disjoint registers, a new matrix can start while the last one drains. The minimum safe interval is 12 cycles, set by the slowest PE, which settles at t=11. Firing at t=11 was shown to corrupt row 4 of the next matrix. That takes 17 cycles for an isolated multiply down to 12 cycles per matrix, with no new hardware.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Debugging: Bugs That Passed Silently</h2>
+    <p class="text-paper-muted leading-relaxed mb-5">The most useful lesson was that zero tool errors does not mean a correct design.</p>
+    <ul class="text-sm text-paper-muted space-y-3 list-disc list-outside pl-4">
+      <li><strong class="text-paper">Wrong answer, no errors.</strong> The accumulator mux had backwards select polarity, and a latency setting added a hidden second register that doubled the accumulate loop. I found it by building an independent cycle-accurate Python model and diffing it against the exported data.</li>
+      <li><strong class="text-paper">Simulates fine, never synthesized.</strong> The matrix-vector muxes were built outside the DUT subsystem. The tell was that the resource report was byte-identical after I added hardware. Moving them inside produced exactly the predicted +48 LUTs.</li>
+      <li><strong>Native blocks posing as HDL blocks.</strong> Plain Simulink blocks simulate identically but fail code generation. I confirmed it by inspecting the model XML and swapped in the AMD HDL library blocks.</li>
+      <li><strong>Off-by-one readback window.</strong> A delay's output at time t reflects what was selected at t-1, so the readback window is t=13 to 16, not 12 to 15. I caught this before it reached the design.</li>
+    </ul>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Results</h2>
+    <div class="grid sm:grid-cols-2 gap-5 mb-6">
+      <div class="card p-5">
+        <h3 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Resources (xczu3eg)</h3>
+        <ul class="text-sm text-paper-muted space-y-1 font-mono">
+          <li>DSP48E2: 16 of 360 (4.4%)</li>
+          <li>LUTs: 560 of 70,560 (0.8%)</li>
+          <li>Registers: 704 of 141,120 (0.5%)</li>
+          <li>BRAM: 0 of 216</li>
+        </ul>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Timing and Throughput</h3>
+        <ul class="text-sm text-paper-muted space-y-1 font-mono">
+          <li>Slack +7.797 ns at 100 MHz</li>
+          <li>Fmax about 454 MHz (estimate)</li>
+          <li>Latency: 17 cycles (170 ns at 100 MHz)</li>
+          <li>Throughput: 12 cycles per matrix</li>
+        </ul>
+      </div>
+    </div>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      Fmax comes from the constraint minus the slack (10 &minus; 7.797 = 2.203 ns), not from 1 over the data path delay.
+      The shortcut gives 457.9 MHz and overstates by about 4 MHz because it ignores setup time and clock uncertainty.
+      The 454 MHz figure is a post-synthesis static timing estimate, not a clock measured on hardware.
+    </p>
+    <p class="text-paper-muted leading-relaxed">
+      Verification: 224 data points (16 accumulators over 14 timesteps) matched an independent Python model with
+      zero mismatches. Two randomized, self-checking MATLAB regression scripts replay exact cases from saved seeds
+      and golden files, and test pipelined matrix-matrix and matrix-vector operations.
+    </p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">CUDA Matrix Multiplication Study</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      I profiled a one-thread-per-output CUDA kernel across 8 configurations (N = 4 and 1024, with 4x4, 8x8, 16x16 and
+      32x32 threads per block), keeping the second of two runs to avoid first-run caching effects.
+    </p>
+    <div class="overflow-x-auto mb-4">
+      <table class="w-full text-sm text-paper-muted font-mono">
+        <thead><tr class="text-paper-faint text-left text-[11px] uppercase tracking-wider"><th class="py-2 pr-4">Block (N=1024)</th><th class="pr-4">Kernel</th><th>Kernel % of total</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">4x4</td><td class="pr-4">159.60 ms</td><td>98.30%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">8x8</td><td class="pr-4">41.38 ms</td><td>94.17%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">16x16</td><td class="pr-4">41.48 ms</td><td>94.20%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">32x32</td><td class="pr-4">41.58 ms</td><td>84.63%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-paper-muted leading-relaxed">
+      At N=1024, 4x4 blocks were about 3.9x slower than 8x8. A 16-thread block fills only half of a 32-thread warp, and
+      this un-tiled kernel's weak memory coalescing at small block sizes compounds the penalty beyond the roughly 2x that
+      warp fill alone would explain. At N=4 the whole problem fits in one block, so launch overhead and noise dominate.
+    </p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">HLS Accelerator on the Board</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      A matrix multiplier written in Vitis HLS (pipeline II=1, 16 multipliers, matrix-matrix and matrix-vector modes) ran
+      on the Zynq board against ARM software. Five tests passed in C simulation and on the board, with zero mismatches at
+      both 100 MHz and 187.5 MHz.
+    </p>
+    <div class="card p-5">
+      <p class="text-sm text-paper-muted leading-relaxed">
+        <strong class="text-paper">The hardware was slower than the ARM core:</strong> about 26.6 &micro;s per problem
+        versus 2.19 &micro;s (0.08x), and raising the fabric clock from 100 to 187.5 MHz barely changed it. That points to
+        per-call overhead (driver and AXI transactions, 8 IP calls per problem) dominating tiny 4x4 problems. This is my
+        interpretation of the numbers. Confirming it would need per-call latency measurements or batching more work into each call.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Tools</h2>
+    <p class="text-sm text-paper-muted font-mono leading-relaxed">
+      Vitis Model Composer &middot; Simulink &middot; MATLAB &middot; Python &middot; Vivado timing and resource analysis &middot;
+      Vitis HLS &middot; CUDA &middot; AMD Zynq UltraScale+ (AUP-ZU3)
+    </p>
+  </section>
+
+</main>
+
+<footer class="border-t border-ink-line py-10 px-6 max-w-3xl mx-auto flex items-center justify-between">
+  <a href="../index.html" class="font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">&larr; Back to portfolio</a>
+  <p class="font-mono text-[11px] text-paper-faint">&copy; <span id="year"></span> Sugiarto Wibowo</p>
+</footer>
+
+<script src="../js/site.js"></script>
+</body>
+</html>

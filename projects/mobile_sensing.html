@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intelligent Mobile Systems: Sensing and TinyML — Sugiarto Wibowo</title>
+<link rel="shortcut icon" href="../images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="bg-ink">
+
+<header class="border-b border-ink-line">
+  <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="../index.html" class="font-mono text-sm tracking-widest text-paper">SW<span class="text-copper">/</span>01</a>
+    <a href="../index.html#work" class="font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">&larr; All Projects</a>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-6 py-16">
+
+  <p class="eyebrow mb-3">Signal Processing &middot; Sensing &middot; TinyML &middot; ELEC 537 (Coursework, Fall 2025)</p>
+  <h1 class="font-display text-4xl md:text-5xl text-paper mb-4">Intelligent Mobile Systems</h1>
+  <p class="font-display text-xl text-paper-muted mb-8">Getting useful information out of phone and embedded sensors: a hand-built STFT, step detection, acoustic ranging with clock drift correction, and YOLO optimization on a Raspberry Pi.</p>
+
+  <div class="card p-5 mb-12">
+    <p class="text-sm text-paper-muted leading-relaxed">
+      Rice ELEC 537 covered signal processing for sensing, localization, and on-device machine learning. This page covers
+      the three graded assignments, all of which I wrote up with code and plots in
+      <a href="https://github.com/osugiw/ELEC537_Intelligent_Mobile_Sys" target="_blank" class="link-underline text-paper">this repository</a>.
+      The course final project was an
+      <a href="https://github.com/osugiw/elec537_robotcar" target="_blank" class="link-underline text-paper">assistive robot for low-visibility conditions</a>,
+      which has its own entry in the project list.
+    </p>
+  </div>
+
+  <!-- ============ Assignment 1 ============ -->
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Assignment 1: STFT from Scratch and Step Detection</h2>
+
+    <h3 class="font-display text-lg text-paper mb-2">A spectrogram built without the library function</h3>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      A short-time Fourier transform (STFT) cuts a signal into frames and takes the spectrum of each one, so you can see
+      which frequencies are present at which moment. I first plotted the built-in MATLAB spectrogram of a recording that
+      steps through tones, using a 1024-point FFT and a Hamming window, then rebuilt the same result by hand.
+    </p>
+    <img src="mobile_sensing/a1_spectrogram.jpg" alt="Spectrogram of the audio file showing tones stepping between about 100 and 480 Hz" class="rounded-sm border border-ink-line w-full mb-2">
+    <p class="font-mono text-xs text-paper-faint mb-6">Reference spectrogram: each horizontal line is a tone, and it changes every second.</p>
+
+    <div class="space-y-5 mb-6">
+      <div class="card p-5">
+        <h4 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Step 1. Make the DFT a matrix</h4>
+        <p class="text-sm text-paper-muted leading-relaxed">The DFT of a frame is just a matrix times a vector. I generated the 1024 x 1024 matrix with <span class="font-mono">exp(-1j*2*pi*n'*m/N)</span>. Plotted, its real part is a cosine pattern and its imaginary part is a sine pattern, the same shape shifted in phase. For a real signal the spectrum's second half is the complex conjugate of its first half, which is why only the positive half of the frequencies carries new information.</p>
+      </div>
+      <div class="card p-5">
+        <h4 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Step 2. Window each frame, multiply, stack the columns</h4>
+        <p class="text-sm text-paper-muted leading-relaxed">Each 1024-sample frame is multiplied by a Hamming window to reduce spectral leakage, then by the DFT matrix. The columns become the spectrogram. Tones came out near 50, 100, 150, 250, 300, and 450 Hz, but with non-overlapping frames they look broken between steps.</p>
+      </div>
+      <div class="card p-5">
+        <h4 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Step 3. Do the whole STFT in one matrix multiplication</h4>
+        <p class="text-sm text-paper-muted leading-relaxed">The challenge was to avoid loops and reshaping. For non-overlapping frames I built a block-diagonal DFT matrix with <span class="font-mono">kron(eye(numFrames), dft_matrix)</span> and a block-diagonal window matrix, so a single product gives every frame. For 50% overlap the frames share samples, so I added a sparse selection matrix that extracts the overlapping frames from the raw signal first.</p>
+      </div>
+    </div>
+
+    <img src="mobile_sensing/a1_stft_overlap.jpg" alt="Home-grown STFT with 512-sample overlap computed in one matrix multiplication" class="rounded-sm border border-ink-line w-full mb-2">
+    <p class="font-mono text-xs text-paper-faint mb-4">My STFT with 512-sample overlap, computed with one big matrix multiplication.</p>
+    <p class="text-paper-muted leading-relaxed mb-10">
+      The overlapping version shows the same tones but smoother, because tonal events are less likely to fall between
+      frames. The price is more FFTs: with 50% overlap the number of frames roughly doubles.
+    </p>
+
+    <h3 class="font-display text-lg text-paper mb-2">Time of arrival from an accelerometer</h3>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      Given a phone accelerometer log of a walk (10 Hz sampling), the task was to estimate how long it would take to walk
+      480 m between two campus buildings. The Y axis sat around 9 to 12 m/s&sup2;, which is gravity, so Y was not useful
+      for steps. The Z axis showed the repeating pattern of walking, so I took its FFT and read off the dominant peak.
+    </p>
+    <img src="mobile_sensing/a1_accel_fft.jpg" alt="FFT of the Z axis accelerometer data, with a peak near 1.4 Hz" class="rounded-sm border border-ink-line w-full mb-4">
+    <div class="card p-5 mb-4">
+      <p class="text-sm text-paper-muted leading-relaxed">
+        Worked through: step frequency <strong class="text-paper">1.39 Hz</strong> &times; an assumed stride of
+        <strong class="text-paper">0.5 m</strong> = <strong class="text-paper">0.69 m/s</strong> walking speed. Then
+        480 m &divide; 0.69 m/s &asymp; <strong class="text-paper">691 s</strong>, about 11.5 minutes.
+      </p>
+    </div>
+    <p class="text-paper-muted leading-relaxed">
+      The stride length is an assumption, not a measurement, and the answer scales directly with it. Using a calibrated
+      stride for each person is the obvious improvement.
+    </p>
+  </section>
+
+  <!-- ============ Assignment 2 ============ -->
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Assignment 2: Acoustic Ranging with Clock Drift Correction</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      A laptop speaker played a repeating preamble once per second, and my phone recorded it. Sound travels at about
+      343 m/s, so if I know exactly when each preamble arrived relative to when it was sent, the range follows. I recorded
+      two cases: a static phone next to the speaker, and a phone moved slowly toward it. The hard part is that the two
+      devices have separate clocks, so I solved the problem in three layers.
+    </p>
+
+    <div class="space-y-5 mb-6">
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">1. Find each preamble by cross-correlation</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">I slid the known template along the recording using <span class="font-mono">conv</span> with the template flipped (because convolution flips it, and correlation should not). The peaks mark preamble positions, and a threshold plus a minimum spacing in <span class="font-mono">findpeaks</span> rejected false detections. This is accurate to about one sample.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">2. Measure and remove clock drift</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">The true transmit interval was not given, so I estimated it from the static recording as <strong class="text-paper">1.000007 s</strong>. A linear fit (<span class="font-mono">polyfit</span>) of detected arrival time against preamble number gave a slope of <strong class="text-paper">1.00000511</strong>. Dividing by the transmit interval gives a drift ratio of 0.99999833, so the receiver clock runs about <strong class="text-paper">1.67 ppm slow</strong>. That is tiny, but over a two-minute recording it accumulates into a visible range error, as the plot shows.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">3. Refine below one sample with FFT phase</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">A delay smaller than one sample appears as a phase slope across frequency. For each detected preamble I took the FFT (Hann window), computed the phase of the recorded spectrum divided by the reference spectrum, kept only the strong frequency bins, and fitted a line. The slope is the sub-sample delay. The final delay is the coarse estimate plus this fine correction, and I resampled from 16 kHz to 48 kHz first.</p>
+      </div>
+    </div>
+
+    <img src="mobile_sensing/a2_static_drift.jpg" alt="Static range estimate before and after clock drift correction" class="rounded-sm border border-ink-line w-full mb-2">
+    <p class="font-mono text-xs text-paper-faint mb-6">Static phone. Before correction (red) the range estimate drifts across the recording. After correction (green) it stays flat, as it should for a phone that does not move.</p>
+
+    <img src="mobile_sensing/a2_moving_coarse_fine.jpg" alt="Moving phone range estimate, coarse versus coarse plus fine" class="rounded-sm border border-ink-line max-w-xl w-full mx-auto mb-2">
+    <p class="font-mono text-xs text-paper-faint mb-6">Moving phone, coarse versus coarse plus fine.</p>
+
+    <div class="card p-5">
+      <p class="text-sm text-paper-muted leading-relaxed">
+        <strong class="text-paper">Honest limits:</strong> the moving result is noisy. Not every preamble was detected while
+        the phone moved, and I reused the drift measured in the static run, but the moving setup has its own drift and frequent movement of the phone. The combined coarse and fine estimate was smoother and more consistent than coarse alone, but I would
+        not call the moving ranges accurate. A subtle detail I had to get right: phase unwrapping helped the fine estimate
+        for the moving case but added spurious whole cycles to the delay in the combined stage, because the coarse step
+        already fixes the whole-cycle ambiguity.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ Assignment 3 ============ -->
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Assignment 3: Optimizing YOLO11n on a Raspberry Pi</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      With a classmate (Steven Chen), I ran the smallest YOLO11 model, YOLO11n, on a Raspberry Pi with its camera, then
+      tried to make it smaller and faster. First a real-time demo: 1280 x 720 camera frames were resized to 576 x 640 for
+      the model, and one sample frame took about 485 ms to process.
+    </p>
+    <p class="text-paper-muted leading-relaxed mb-6">
+      For the experiments we photographed 24 images of three objects (keyboard, mouse, laptop, 8 each) and measured model
+      file size, average inference time on the Pi, and accuracy as correct detections over 24 images.
+    </p>
+
+    <h3 class="font-display text-lg text-paper mb-3">Quantization</h3>
+    <div class="overflow-x-auto mb-4">
+      <table class="w-full text-sm text-paper-muted font-mono">
+        <thead><tr class="text-paper-faint text-left text-[11px] uppercase tracking-wider"><th class="py-2 pr-4">Model</th><th class="pr-4">Size</th><th class="pr-4">Avg inference</th><th>Accuracy</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">PyTorch baseline</td><td class="pr-4">5.35 MB</td><td class="pr-4">242.5 ms</td><td>95.83%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">TFLite FP32</td><td class="pr-4">10.25 MB</td><td class="pr-4">285.4 ms</td><td>95.83%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">TFLite FP16</td><td class="pr-4">5.18 MB</td><td class="pr-4">284.1 ms</td><td>95.83%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">TFLite INT8</td><td class="pr-4">2.89 MB</td><td class="pr-4">247.1 ms</td><td>95.83%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="text-paper-muted leading-relaxed mb-10">
+      Accuracy was identical (23 of 24; the one miss was a mouse). INT8 was the best trade-off: about 46% smaller than the
+      baseline file at nearly the same speed. FP16 halved the size relative to FP32 but gave no real speedup, which suggests
+      the Pi CPU gains little from half-precision floats.
+    </p>
+
+    <h3 class="font-display text-lg text-paper mb-3">Pruning</h3>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      We zeroed the lowest-magnitude weights (L1 pruning) in different layers and measured the damage.
+    </p>
+    <div class="overflow-x-auto mb-4">
+      <table class="w-full text-sm text-paper-muted font-mono">
+        <thead><tr class="text-paper-faint text-left text-[11px] uppercase tracking-wider"><th class="py-2 pr-4">Pruned layers</th><th class="pr-4">Sparsity</th><th class="pr-4">Avg inference</th><th>Accuracy</th></tr></thead>
+        <tbody>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">All Conv2d</td><td class="pr-4">10%</td><td class="pr-4">262.0 ms</td><td>95.83%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">cv1.conv only</td><td class="pr-4">50%</td><td class="pr-4">264.0 ms</td><td>75.00%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">All Conv2d</td><td class="pr-4">30%</td><td class="pr-4">262.7 ms</td><td>0%</td></tr>
+          <tr class="border-t border-ink-line"><td class="py-2 pr-4">cv1.conv only</td><td class="pr-4">30%</td><td class="pr-4">260.7 ms</td><td>0%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card p-5">
+      <p class="text-sm text-paper-muted leading-relaxed">
+        <strong class="text-paper">What I take from it:</strong> pruning did not help at all. File size stayed at 5.35 MB and
+        inference got slower (about 260 ms versus 242 ms), because this kind of unstructured pruning only sets weights to zero.
+        The tensors keep their shape, so nothing gets smaller or faster without sparse-aware hardware or structured pruning.
+        Accuracy also fell off a cliff: at 30% the models detected nothing and once labeled a mouse as a knife. The
+        non-monotonic result (30% on cv1.conv gave 0%, but 50% gave 75%) was not investigated, so I would not draw conclusions
+        about which layers tolerate pruning. The test set is also small, only 24 images, so these numbers show direction rather than precision.
+      </p>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Paper Presentation: The Battery-Free Game Boy</h2>
+    <p class="text-paper-muted leading-relaxed">
+      For the course paper review I presented ENGAGE, a Game Boy that runs on solar power and the energy of button presses
+      instead of a battery. Because power is intermittent, it saves progress with MPatch, a checkpoint scheme that stores only
+      the memory regions that changed (small "patches") in non-volatile FRAM, so a power loss never corrupts the last good
+      state. It is the same problem I meet in low-power wearable firmware: do useful work and keep your state safe when energy is scarce.
+    </p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Where I Use It Now</h2>
+    <p class="text-paper-muted leading-relaxed">
+      The coarse-then-fine idea from Assignment 2 is what I am applying on the Houdini software-defined radio project:
+      record time-domain samples, measure the phase difference between a short and a long cable, and convert it to a time
+      delay as a step toward range measurement with antennas.
+    </p>
+  </section>
+
+  <section>
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Techniques</h2>
+    <p class="text-sm text-paper-muted font-mono leading-relaxed">
+      STFT &middot; DFT matrix &middot; Hamming and Hann windows &middot; FFT peak detection &middot; cross-correlation &middot;
+      linear regression &middot; phase-slope delay estimation &middot; pedestrian dead reckoning &middot; YOLO11 &middot;
+      TFLite quantization (FP32, FP16, INT8) &middot; L1 pruning &middot; Raspberry Pi &middot; MATLAB &middot; Python
+    </p>
+  </section>
+
+</main>
+
+<footer class="border-t border-ink-line py-10 px-6 max-w-3xl mx-auto flex items-center justify-between">
+  <a href="../index.html" class="font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">&larr; Back to portfolio</a>
+  <p class="font-mono text-[11px] text-paper-faint">&copy; <span id="year"></span> Sugiarto Wibowo</p>
+</footer>
+
+<script src="../js/site.js"></script>
+</body>
+</html>
