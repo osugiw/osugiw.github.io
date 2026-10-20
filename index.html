@@ -51,15 +51,21 @@
   <div class="relative grid lg:grid-cols-[1.1fr_0.9fr] gap-14 items-center">
     <div>
       <p class="eyebrow mb-5">Fulbright Scholar · Rice University · Houston, TX</p>
-      <h1 class="font-display text-5xl md:text-6xl leading-[1.05] text-paper mb-6">
-        Building embedded systems<br> from prototype <span class="text-copper italic">to</span> production.
+      <h1 class="font-display text-5xl md:text-6xl leading-[1.05] text-paper mb-4">
+        Sugiarto <span class="text-copper italic">Wibowo</span>
       </h1>
+      <p class="font-display text-xl md:text-2xl text-paper-muted mb-6">
+        Embedded systems engineer, from prototype to production.
+      </p>
+      <p class="text-paper-muted text-lg leading-relaxed max-w-lg mb-4">
+        I'm a Fulbright Scholar from Indonesia, pursuing a Master's in Electrical and Computer Engineering
+        at Rice University. Before Rice, I spent close to three years at Polytron shipping production
+        firmware for a digital rice cooker.
+      </p>
       <p class="text-paper-muted text-lg leading-relaxed max-w-lg mb-8">
-        Embedded systems engineer with experience across consumer electronics, wearables, and RF
-        hardware — from shipping production firmware for a digital rice cooker at Polytron, to
-        building Sally, a wearable AI assistant for Alzheimer's care, to developing a
-        software-defined radio platform at Rice University's Wireless Lab. Away from the bench,
-        I'm usually on a trail, camera in hand, or dialing in a pour-over.
+        Today I work on Houdini, a software-defined radio platform at Rice's Wireless Lab, and I'm building
+        Sally, a wearable for maternal mental health, as my capstone. Away from the bench, I'm usually on a
+        trail, camera in hand (I've visited 15 U.S. national parks so far), or dialing in a pour-over.
       </p>
       <div class="flex flex-wrap gap-3 mb-10">
         <span class="pill">MECE — Rice University</span>
@@ -125,7 +131,7 @@
         production firmware for consumer appliances and researching IoT connectivity standards.
       </p>
       <p>
-        Outside of engineering, I've hiked through <strong class="text-paper font-medium">14 U.S. national parks</strong> so far,
+        Outside of engineering, I've hiked through <strong class="text-paper font-medium">15 U.S. national parks</strong> so far,
         with a road trip through the Pacific Northwest, California, and southwest. I document the trips on
         <a href="https://www.youtube.com/@osugi_w" target="_blank" class="text-paper link-underline">YouTube</a>,
         and spend a fair amount of time perfecting pour-over coffee.
@@ -183,17 +189,19 @@
 
       <article class="border-l-2 border-copper pl-6 relative">
         <span class="absolute -left-[7px] top-1 w-3 h-3 rounded-full bg-copper"></span>
-        <p class="font-mono text-xs text-paper-faint mb-1">May 2026 — Jul 2026</p>
+        <p class="font-mono text-xs text-paper-faint mb-1">May 2026 — Present</p>
         <h3 class="font-display text-xl text-paper mb-2">
-          <a href="https://houdini-sdr.org/index.html" target="_blank" class="link-underline">Embedded Software Engineer Intern</a>
+          <a href="https://houdini-sdr.org/index.html" target="_blank" class="link-underline">Embedded Software Engineer</a>
         </h3>
-        <p class="text-sm text-signal mb-3">Wireless Lab, Rice University · Houston, TX</p>
-        <p class="text-paper-muted text-sm mb-3">Designing and building a software-defined radio system on the Xilinx/AMD RFSoC 4x2, spanning embedded Linux, FPGA, RF, and power electronics.</p>
+        <p class="text-sm text-signal mb-3">Houdini SDR Project, Wireless Lab, Rice University · Houston, TX</p>
+        <p class="text-paper-muted text-sm mb-3">Started as an internship (May to Jul 2026) and continuing as a research project on Houdini, an NSF-funded, open-access, multi-band (CBRS, X-band, Ku-band, V-band) software-defined radio platform for networking, sensing, and imaging research, built on the Xilinx/AMD RFSoC 4x2.</p>
         <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
-          <li>Built custom Linux and Python (PYNQ) drivers for PLL frequency control, with dedicated test software for functional validation</li>
-          <li>Used frequency and logic analyzers to debug signal integrity and confirm RF performance</li>
-          <li>Verified full RF signal chain at X-band (10 GHz)</li>
-          <li>Designed a 4-layer PCB (Altium) for powering a phased-array RF front-end, including multi-rail sequencing and safety protection</li>
+          <li>Diagnosed an ADF4371 PLL that would not lock on the XUD1A board by tracing the schematic and finding it defaulted to an external LO reference. Fixed it by changing one capacitor to route the internal LO, validating first in a PYNQ Python driver</li>
+          <li>Wrote and customized the Linux IIO driver for the ADF4371 and integrated it into Houdini's PetaLinux build, with test software that confirms PLL lock by streaming ADC/DAC data</li>
+          <li>Established a verified X-band loopback (IF 4.5 GHz, LO 14.5 GHz, RF 10.0 GHz)</li>
+          <li>Designed the schematic for a 4-layer Altium power/control board for a phased-array RF front end (enable sequencing, SPDT switching, current sensing, level translation, ESD protection). A Python netlist check caught six defects before fabrication, and bring-up confirmed the power supply works</li>
+          <li>Fixed the Vivado/PetaLinux build pipeline (port mismatches, corrupted device tree overlays, stale sstate cache)</li>
+          <li>Now benchmarking chirp linearity and wideband chirp bandwidth, and measuring received-signal phase delay at 3.8 GHz and 4.5 GHz as a step toward range measurement</li>
         </ul>
       </article>
 
@@ -254,10 +262,10 @@
     <div>
       <div class="grid sm:grid-cols-2 gap-5">
 
-        <a href="https://github.com/osugiw/cp_wearable_ai" class="card p-5 group hover:border-copper transition-colors">
-          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · Wearable Device</p>
-          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">Sally: Wearable AI Assistant</h3>
-          <p class="text-sm text-paper-muted">Capstone project assisting Alzheimer's patients with daily activity recognition and safety feedback.</p>
+        <a href="projects/sally.html" class="card p-5 group hover:border-copper transition-colors">
+          <p class="font-mono text-[11px] text-paper-faint mb-2">Embedded · Wearable · Edge ML</p>
+          <h3 class="font-display text-lg text-paper mb-2 group-hover:text-copper transition-colors">SALLY: Wearable for Maternal Mental Health</h3>
+          <p class="text-sm text-paper-muted">Capstone: a privacy-first necklace that passively tracks vocal stress markers, with all processing on a local edge server.</p>
         </a>
 
         <a href="https://www.hackster.io/the-owl-tonomous-aviators/the-owl-tonomous-aviators-6a67da" target="_blank" class="card p-5 group hover:border-copper transition-colors">
@@ -345,8 +353,8 @@
         <p class="text-sm text-signal mb-3">Rice University · Fulbright Scholar</p>
         <p class="text-sm text-paper-muted mb-3">Specializing in computer engineering, with a focus on wearable devices and embedded systems. Current GPA: 3.94/4.0.</p>
         <ul class="text-sm text-paper-muted space-y-1.5 list-disc list-outside pl-4">
-          <li>Capstone: <a href="https://github.com/osugiw/cp_wearable_ai" class="link-underline text-paper">Sally, a wearable AI assistant</a> for Alzheimer's patient safety</li>
-          <li>Summer 2026 — Embedded SW Intern, <a href="https://houdini-sdr.org/" target="_blank" class="link-underline text-paper">Houdini Project</a>, Wireless Lab</li>
+          <li>Capstone: <a href="projects/sally.html" class="link-underline text-paper">Sally, a wearable for passive maternal mental health monitoring</a></li>
+          <li>Summer 2026 onward: Embedded SW Engineer, <a href="https://houdini-sdr.org/" target="_blank" class="link-underline text-paper">Houdini Project</a>, Wireless Lab (internship, now a research project)</li>
           <li>Research assistant at Phi Lab under <a href="https://nakulg.com/" target="_blank" class="link-underline text-paper">Prof. Nakul Garg</a></li>
           <li>Leadership Member, Fulbright@Rice — <a href="https://fulbright.rice.edu/people/sugiarto-wibowo" target="_blank" class="link-underline text-paper">profile</a> · <a href="https://www.aminef.or.id/sugiarto-wibowo/" target="_blank" class="link-underline text-paper">Fulbright Indonesia profile</a></li>
         </ul>

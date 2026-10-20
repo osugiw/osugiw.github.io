@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SALLY: Wearable for Maternal Mental Health — Sugiarto Wibowo</title>
+<link rel="shortcut icon" href="../images/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/site.css">
+</head>
+<body class="bg-ink">
+
+<header class="border-b border-ink-line">
+  <div class="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="../index.html" class="font-mono text-sm tracking-widest text-paper">SW<span class="text-copper">/</span>01</a>
+    <a href="../index.html#work" class="font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">&larr; All Projects</a>
+  </div>
+</header>
+
+<main class="max-w-3xl mx-auto px-6 py-16">
+
+  <p class="eyebrow mb-3">Embedded &middot; Wearable &middot; Edge ML &middot; ELEC 594 Capstone</p>
+  <h1 class="font-display text-4xl md:text-5xl text-paper mb-4">SALLY</h1>
+  <p class="font-display text-xl text-paper-muted mb-8">A wearable for passive, at-home monitoring of maternal mental health.</p>
+
+  <a href="sally/poster_full.jpg" target="_blank">
+    <img src="sally/poster_full.jpg" alt="Rice360 poster: Can Voice Reveal a Mother's Stress?" class="rounded-sm border border-ink-line w-full mb-3">
+  </a>
+  <p class="font-mono text-xs text-paper-faint mb-10">Rice360 Innovation for Healthcare Access 2026 poster. Click to open full size.</p>
+
+  <div class="card p-5 mb-12">
+    <p class="text-sm text-paper-muted leading-relaxed">
+      SALLY is a necklace that listens for vocal markers of rising stress during pregnancy and postpartum.
+      All processing happens on a local Raspberry Pi edge server, with no cloud services and no third-party API calls.
+      It is a two-semester Rice University ECE capstone (ELEC 594), supervised by Nakul Garg.
+      SALLY is a research prototype and does not diagnose any condition.
+    </p>
+  </div>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">The Problem</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      Mental health conditions are a leading, preventable cause of pregnancy-related death in the U.S., yet fewer than
+      1 in 5 pregnant and postpartum patients receive standard depression or anxiety screening. Screening today is
+      episodic: a questionnaire at a scheduled visit, weeks apart, while acute stress can spike and resolve in minutes
+      and go entirely unobserved.
+    </p>
+    <p class="text-paper-muted leading-relaxed mb-6">
+      SALLY's bet is that continuous, passive, privacy-preserving vocal monitoring can build the longitudinal picture
+      that periodic screening cannot. Rural mothers, who may live far from a birthing hospital, are the motivating case.
+    </p>
+    <img src="sally/rural_care_gap.jpg" alt="Poster section: the rural care gap, screening rates and Texas birthing hospital map" class="rounded-sm border border-ink-line w-full">
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">My Role</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      I own the embedded hardware and firmware end to end: enclosure design, firmware architecture, power management,
+      and device reliability. I also built the stress-detection model (Fall 2026), and I am the sole author of the
+      capstone report and presentations.
+    </p>
+    <p class="text-paper-muted leading-relaxed">
+      The project began as a three-person team. <strong class="text-paper">Jeeven Balasubramaniam</strong> built the original
+      Spring 2026 server-side language pipeline and helped build the mobile app, and he co-presents the Rice360 poster.
+      The mobile app was a joint effort.
+    </p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">System Architecture</h2>
+    <div class="grid sm:grid-cols-2 gap-5 mb-8">
+      <div class="card p-5">
+        <h3 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Wearable Hardware</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">Seeed XIAO ESP32-S3 Plus, INMP441 PDM microphone, microSD for local buffering, a WS2812B RGB status LED and push button on a small dedicated PCB, and a 500 mAh LiPo battery.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Firmware</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">C++ on ESP-IDF v5.5.2 and FreeRTOS. On-device voice activity detection (ESP-SR VADNet) gates the recording pipeline, so only real conversation is captured and queued, with no wake word.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Edge Server</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">Raspberry Pi 5 running self-hosted Whisper transcription, speaker diarization with owner-voice enrollment, voice analysis, and local LLM summarization. Audio is deleted after analysis.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-mono text-[11px] uppercase tracking-wider text-paper-faint mb-3">Mobile App</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">Flutter app over Tailscale. Scope is deliberately narrow: voice-derived model scores and conversation transcripts for the mother only, with no physiological biomarkers and no caregiver features.</p>
+      </div>
+    </div>
+    <img src="sally/pipeline.jpg" alt="SALLY pipeline from pendant to Raspberry Pi server to mobile app" class="rounded-sm border border-ink-line max-w-md mx-auto">
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Enclosure and Prototype</h2>
+    <p class="text-paper-muted leading-relaxed mb-6">
+      Designed in SolidWorks. The first prototype was a cube, which proved too bulky and swung while walking. That
+      failure drove the current design: a flat, edge-free pebble split into a bottom tray that holds all the electronics
+      and touches the chest, and a top lid that is only a cover. It is fastened with M2.5 screws into heat-set brass
+      inserts instead of self-tapping into plastic, and twin molded cord loops keep the pendant from spinning on the lanyard.
+    </p>
+    <img src="sally/pendant.jpg" alt="SALLY V1 pendant prototype and worn on a lanyard" class="rounded-sm border border-ink-line w-full mb-6">
+    <img src="sally/app_companion.jpg" alt="Companion app screens with illustrative data" class="rounded-sm border border-ink-line w-full mb-2">
+    <p class="font-mono text-xs text-paper-faint">Companion app screens (illustrative data).</p>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Engineering Highlights</h2>
+    <p class="text-paper-muted leading-relaxed mb-6">Each of these was a real failure caught and fixed before it became a silent one.</p>
+    <div class="space-y-5">
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Silent data loss during uploads</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">A mutex protecting SD card access was held for the whole HTTP upload, a full network round trip. Any conversation that happened while a file was uploading was silently dropped, with no error anywhere. I restructured the path to read the file into a PSRAM buffer, release the lock, then upload outside it. Confirmed on real hardware.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Server upload stalls of up to a minute</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">Intermittent stalls of about 57 seconds traced to the Pi's Flask server running single-threaded, with the transcription and LLM pipeline sharing the same Python GIL. Enabling threaded request handling fixed it, verified on hardware.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Upload ordering bug</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">The on-device file listing returned raw filesystem order, which both uploads and low-storage eviction assumed was chronological. A newer recording could be evicted or uploaded ahead of an older one. Because filenames are fixed-width and zero-padded, one lexicographic sort at the shared choke point made both paths correct.</p>
+      </div>
+      <div class="card p-5">
+        <h3 class="font-display text-lg text-paper mb-2">Battery versus upload bandwidth (Semester 1)</h3>
+        <p class="text-sm text-paper-muted leading-relaxed">On the original 400 mAh cell, recording alone ran 9.5 hours but recording plus Wi-Fi upload ran only 4.5 hours, missing the 8-hour wear target. Uploading large audio files, not recording, was the dominant drain. That led to local SD buffering with batched uploads and, later, a catch-up path that bundles a backlog into one multipart request with per-file confirmation. These hours are last semester's numbers on old hardware. The savings from VAD and batching are not yet measured.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Stress-Scoring Model</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      Instead of training on an unlabeled dataset, I grounded the feature selection in a peer-reviewed study
+      (Pisanski &amp; Sorokowski, 2021) that measured cortisol alongside voice recordings from 10 women at rest and right
+      before an oral exam. Cortisol is only a validation signal, never a training target, since a wearable cannot sample saliva.
+    </p>
+    <p class="text-paper-muted leading-relaxed mb-6">
+      Three uncorrelated acoustic measures feed a logistic regression: mean pitch (F0), speech rate, and formant spacing.
+      With leave-one-speaker-out cross-validation the AUC is 0.78, which falls to a more honest 0.64 once feature selection
+      is nested inside the cross-validation.
+    </p>
+    <div class="grid sm:grid-cols-2 gap-5 mb-6">
+      <img src="sally/voice_parameters.jpg" alt="Significant voice parameters under stress" class="rounded-sm border border-ink-line w-full">
+      <img src="sally/stress_model.jpg" alt="Stress scoring model features and RAVDESS test" class="rounded-sm border border-ink-line w-full">
+    </div>
+    <img src="sally/stress_arousal.jpg" alt="Per-speaker changes from baseline to stress" class="rounded-sm border border-ink-line max-w-md mx-auto">
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">The Honest Result</h2>
+    <p class="text-paper-muted leading-relaxed mb-4">
+      I tested the model on RAVDESS, a separate dataset of 12 female actors portraying 8 emotions. Angry and fearful clips
+      scored higher than calm and neutral clips for all 12 of 12 actors, which looks like a clean win. But happy and
+      surprised clips scored even higher, and surprised was the single highest of the eight emotions.
+    </p>
+    <div class="card p-5 mb-6">
+      <p class="text-sm text-paper-muted leading-relaxed">
+        <strong class="text-paper">So the model is an arousal detector, not a stress detector.</strong>
+        Telling genuine stress from excitement will need physiological ground truth from a real patient population,
+        not acted emotion. That is why the output is labeled a "model score" (0 to 100) and never a "stress score".
+        Both datasets are small and neither is pregnancy-specific.
+      </p>
+    </div>
+    <img src="sally/technical_results.jpg" alt="Technical results: battery life, PCA domain check, RAVDESS testing" class="rounded-sm border border-ink-line max-w-md mx-auto">
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Status and Next Steps</h2>
+    <ul class="text-sm text-paper-muted space-y-2 list-disc list-outside pl-4 mb-6">
+      <li>Rice360 Innovation for Healthcare Access 2026 poster, October 22, 2026</li>
+      <li>ELEC 594 midterm presentation and 3-page IEEE-format report, October 21, 2026</li>
+      <li>Rice Research in Action graduate student showcase, November 13, 2026</li>
+    </ul>
+    <p class="text-paper-muted leading-relaxed mb-4">Still open, and not claimed as done:</p>
+    <ul class="text-sm text-paper-muted space-y-2 list-disc list-outside pl-4 mb-6">
+      <li>Measure battery life with VAD and batched uploads (needs a 5V step-up converter to test properly)</li>
+      <li>Experimentally validate the owner-voice filter</li>
+      <li>Tune the stress model with more tests</li>
+      <li>Obtain IRB approval and collaborate with a hospital to collect real maternal speech data. No clinical partnership exists yet.</li>
+    </ul>
+    <img src="sally/next_steps.jpg" alt="Poster next steps" class="rounded-sm border border-ink-line w-full">
+  </section>
+
+  <section class="mb-12">
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Stack</h2>
+    <div class="grid sm:grid-cols-2 gap-5">
+      <div class="card p-5">
+        <ul class="text-sm text-paper-muted space-y-1 font-mono">
+          <li>C++ &middot; ESP-IDF 5.5.2 &middot; FreeRTOS</li>
+          <li>ESP-SR 2.5.1 (VADNet)</li>
+          <li>XIAO ESP32-S3 &middot; INMP441 &middot; microSD</li>
+          <li>SolidWorks</li>
+        </ul>
+      </div>
+      <div class="card p-5">
+        <ul class="text-sm text-paper-muted space-y-1 font-mono">
+          <li>Raspberry Pi 5 &middot; Flask &middot; Whisper</li>
+          <li>Python &middot; Parselmouth &middot; scikit-learn</li>
+          <li>Flutter &middot; Tailscale</li>
+          <li>Datasets: Sussex cortisol, RAVDESS</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="font-mono text-xs uppercase tracking-wider text-signal mb-4">Code and Credits</h2>
+    <ul class="space-y-2 text-sm text-paper-muted list-disc list-outside pl-4">
+      <li><a href="https://github.com/osugiw/cp_wearable_ai" target="_blank" class="link-underline text-paper">Wearable firmware repository</a></li>
+      <li><a href="https://github.com/osugiw/CP_mobile_apps" target="_blank" class="link-underline text-paper">Mobile app repository</a></li>
+      <li>Nakul Garg, project supervisor, Phi Lab, Department of Electrical and Computer Engineering, Rice University</li>
+      <li>Jeeven Balasubramaniam, collaborator on the server pipeline and mobile app</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer class="border-t border-ink-line py-10 px-6 max-w-3xl mx-auto flex items-center justify-between">
+  <a href="../index.html" class="font-mono text-xs uppercase tracking-wider text-paper-muted link-underline">&larr; Back to portfolio</a>
+  <p class="font-mono text-[11px] text-paper-faint">&copy; <span id="year"></span> Sugiarto Wibowo</p>
+</footer>
+
+<script src="../js/site.js"></script>
+</body>
+</html>
